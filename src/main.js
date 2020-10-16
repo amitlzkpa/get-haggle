@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
 import App from '@/App.vue';
 import router from '@/router';
 import store from '@/store';
@@ -19,6 +21,9 @@ async function main() {
   let domain = secrets.AUTH0_DOMAIN;
   let clientId = secrets.AUTH0_CLIENT_ID;
 
+  Vue.use(Vuetify);
+  let vuetify = new Vuetify({});
+
   Vue.use(Auth0Plugin, {
     domain,
     clientId,
@@ -37,6 +42,7 @@ async function main() {
     el: '#app',
     store,
     router,
+    vuetify,
     render: h => h(App),
   });
 

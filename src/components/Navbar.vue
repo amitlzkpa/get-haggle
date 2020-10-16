@@ -1,15 +1,21 @@
 <template>
   <div>
-    <router-link to="/">Home</router-link>
-    &nbsp;|&nbsp;
-    <router-link to="/about">About</router-link>
-    &nbsp;|&nbsp;
-    <router-link v-if="$auth.isAuthenticated" to="/profile">Profile</router-link>
-    &nbsp;|&nbsp;
-    <span v-if="!$auth.loading">
-      <a v-if="!$auth.isAuthenticated" @click="login" href="#!">Log in</a>
-      <a v-if="$auth.isAuthenticated" @click="logout" href="#!">Log out({{ $auth.user.name }})</a>
-    </span>
+
+    <v-app-bar app color="primary" dense dark>
+        
+      <v-btn text to="/">Bill and Mat</v-btn>
+      <v-btn text to="/about">About</v-btn>
+
+      <v-spacer></v-spacer>
+
+      <span v-if="!$auth.loading">
+        <v-btn text to="/profile" v-if="$auth.isAuthenticated">Profile</v-btn>
+        <v-btn text @click="login" v-if="!$auth.isAuthenticated">Log in</v-btn>
+        <v-btn text @click="logout" v-if="$auth.isAuthenticated">Log out</v-btn>
+      </span>
+
+    </v-app-bar>
+
   </div>
 </template>
 

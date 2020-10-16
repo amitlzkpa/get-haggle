@@ -1,13 +1,16 @@
 <template>
-  <div id="app">
+  <v-app>
     <Navbar />
-    <hr />
-    <router-view />
-  </div>
+    <v-main>
+      <v-container>
+        <router-view />
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+import Navbar from '@/components/Navbar.vue';
 
 export default {
   name: 'App',
@@ -16,6 +19,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

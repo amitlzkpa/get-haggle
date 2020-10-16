@@ -1,33 +1,75 @@
 <template>
   <div>
-    <h1>Vue Starter</h1>
-    <img src="/imgs/img.png" id="img" />
-    <br />
-    <button @click="onDecrLcl">Decrement Local</button>
-    &nbsp;&nbsp;
-    <span>{{ num }}</span>
-    &nbsp;&nbsp;
-    <button @click="onIncrLcl">Increment Local</button>
-    <br />
-    <button @click="onDecrVuex">Decrement Vuex</button>
-    &nbsp;&nbsp;
-    <span>{{ $store.state.count }}</span>
-    &nbsp;&nbsp;
-    <button @click="onIncrVuex">Increment Vuex</button>
-    <br />
-    <button @click="onTestRoute">Test public API route</button>
-    &nbsp;&nbsp;
-    <button @click="onTestUserRoute">Test protected User API route</button>
+
+    <v-row>
+      <v-col>
+        
+        <h1 class="display-2 font-weight-bold">
+          Bill and Mat
+        </h1>
+        
+        <v-img
+          src="/imgs/img.png"
+          class="my-3"
+          contain
+          height="200"
+        />
+        
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col>
+        
+        <h2>Local Value</h2>
+        <v-btn @click="onDecrLcl">-</v-btn>
+        <span class="mx-3">{{ num }}</span>
+        <v-btn @click="onIncrLcl">+</v-btn>
+        
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col>
+
+        <h2>Vuex Value</h2>
+        <v-btn @click="onDecrVuex">-</v-btn>
+        <span class="mx-3">{{ $store.state.count }}</span>
+        <v-btn @click="onIncrVuex">+</v-btn>
+        
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col>
+
+        <h2>Test Routes</h2>
+        <v-btn @click="onTestRoute" class="ma-2">Test public API route</v-btn>
+        <span>{{ publicRouteMsg }}</span>
+
+        <br />
+        
+        <v-btn @click="onTestUserRoute" class="ma-2">Test protected User API route</v-btn>
+        <span>{{ protectedRouteMsg }}</span>
+
+        <br />
+        
+        <v-btn @click="onClearMsgs" class="ma-2">Clear messages</v-btn>
+        
+      </v-col>
+    </v-row>
+
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'vuestarter-mevn',
   data() {
     return {
       num: 0,
+      publicRouteMsg: null,
+      protectedRouteMsg: null
     }
   },
   methods: {
@@ -46,23 +88,26 @@ export default {
     async onTestRoute() {
       let res = await this.$api.get('/api/test');
       console.log(res.data);
+      this.publicRouteMsg = res.data;
     },
     async onTestUserRoute() {
       try {
         let res = await this.$api.get('/api/users/test');
         console.log(res.data);
+        this.protectedRouteMsg = res.data;
       } catch(err) {
         console.log(err.message);
+        this.protectedRouteMsg = err.message;
       }
+    },
+    async onClearMsgs() {
+      this.publicRouteMsg = null;
+      this.protectedRouteMsg = null;
     }
   }
 }
 </script>
 
 <style scoped>
-
-#img {
-  width: 400px;
-}
 
 </style>
