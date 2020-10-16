@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const swaggerAPIDocSetup = require('./configs/apidoc');
 
 const DIR = 'build';
 const PORT = process.env.PORT || 8080;
@@ -20,8 +19,6 @@ app.use(bodyParser.json({ limit: '500mb' }));
 app.use(bodyParser.urlencoded({ limit: '500mb', extended: true }));
 
 app.use("/", require('./routes'));
-
-swaggerAPIDocSetup.setup(app);
 
 const base = path.join(__dirname, '../');
 const indexFilePath = path.join(base, `/${DIR}/index.html`);
