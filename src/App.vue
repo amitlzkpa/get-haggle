@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Navbar from '@/partials/Navbar.vue'
+import Navbar from '@/components/Navbar.vue'
 
 export default {
   name: 'App',

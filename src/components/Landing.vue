@@ -48,8 +48,12 @@ export default {
       console.log(res.data);
     },
     async onTestUserRoute() {
-      let res = await this.$api.get('/api/users/test');
-      console.log(res.data);
+      try {
+        let res = await this.$api.get('/api/users/test');
+        console.log(res.data);
+      } catch(err) {
+        console.log(err.message);
+      }
     }
   }
 }

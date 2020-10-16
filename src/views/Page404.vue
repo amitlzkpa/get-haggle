@@ -2,7 +2,7 @@
   <div>
     <h1>Page 404</h1>
     <p>
-      Unknown URL
+      Not found
     </p>
   </div>
 </template>

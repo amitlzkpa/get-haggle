@@ -5,10 +5,9 @@ import About from '@/views/About.vue';
 import Profile from '@/views/Profile.vue';
 import Page404 from "@/views/Page404.vue";
 
-import { authGuard } from "@/auth/authGuard";
+import guards from '@/router/guards';
 
 Vue.use(VueRouter);
-
 
 const routes =
 [
@@ -33,9 +32,9 @@ const routes =
     name: 'profile',
     component: Profile,
     meta: {
-      title: route => "App: Profile"
-    },
-    beforeEnter: authGuard,
+      title: route => "App: Profile",
+      guards: [ guards.authGuard ]
+    }
   },
   {
     path: "*",
@@ -58,7 +57,8 @@ router.beforeEach((to, from, next) => {
   if (to.meta && to.meta.title) {
     document.title = to.meta.title(to);
   }
-  next();
+  if (!to.meta.guards || to.meta.guards.length < 1) return next();
+  return guards.pipeline(to, from, next, to.meta.guards);
 });
 
 
