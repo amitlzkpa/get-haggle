@@ -37,10 +37,9 @@ const errHandler = async function (err, req, res, next) {
 
 
 const addUserToReq = async function(req, res, next) {
-  let auth0User = req.user;
-  let user = await User.findOne({username: auth0User.nickname});
-  req.auth0User = auth0User;
-  req.user = user;
+  let dbUser = await User.findOne({username: req.user.nickname});
+  req.dbUser = dbUser;
+  req.auth0User = req.user;
   next();
 }
 

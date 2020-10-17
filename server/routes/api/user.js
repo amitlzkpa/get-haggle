@@ -133,12 +133,12 @@ router.post('/', async (req, res) => {
   if (!u || u === {}) {
     return res.status(400).send();
   }
-  let user = await User.findOne({ username: u.nickname });
+  let user = await User.findOne({ username: req.body.nickname });
   if (user) {
     return res.json(user);
   }
   user = new User({
-    username: u.nickname,
+    username: req.auth0User.nickname,
     name: u.name,
     email: u.email
   });
@@ -147,6 +147,38 @@ router.post('/', async (req, res) => {
 });
 
 
+/**
+ * @swagger
+ * path:
+ *  /api/users/:
+ *    put:
+ *      summary: Update current user. Returns updated user. Username can not be updated.
+ *      tags: [Users]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/User'
+ *      responses:
+ *        "200":
+ *          description: Updated user entry.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/User'
+ */
+router.put('/', async (req, res) => {
+  const u = req.body;
+  if (!u || u === {}) {
+    return res.status(400).send();
+  }
+  let user = req.dbUser;
+  user.name = u.name || user.name;
+  user.email = u.email || user.email;
+  user = await user.save();
+  return res.json(user);
+});
 
 
 router.get('/test', function(req, res) {
