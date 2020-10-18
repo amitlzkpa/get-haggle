@@ -3,15 +3,16 @@
 
     <v-app-bar app color="primary" dense dark>
         
-      <v-btn text to="/">Bill and Mat</v-btn>
-      <v-btn text to="/about">About</v-btn>
+      <v-btn text to="/">vuestarter</v-btn>
+      <v-btn text to="/about">about</v-btn>
 
       <v-spacer></v-spacer>
 
       <span v-if="!$auth.loading">
-        <v-btn text to="/profile" v-if="$auth.isAuthenticated">Profile</v-btn>
-        <v-btn text @click="login" v-if="!$auth.isAuthenticated">Log in</v-btn>
-        <v-btn text @click="logout" v-if="$auth.isAuthenticated">Log out</v-btn>
+        <v-btn text to="/project/new" v-if="$auth.isAuthenticated">new project</v-btn>
+        <v-btn text to="/profile" v-if="$auth.isAuthenticated">profile</v-btn>
+        <v-btn text @click="login" v-if="!$auth.isAuthenticated">log in</v-btn>
+        <v-btn text @click="logout" v-if="$auth.isAuthenticated">log out</v-btn>
       </span>
 
     </v-app-bar>

@@ -5,7 +5,7 @@
       <v-col>
         
         <h1 class="display-2 font-weight-bold">
-          Bill and Mat
+          Vue Starter
         </h1>
         
         <v-img

@@ -55,6 +55,7 @@ router.get('/test', function(req, res) {
 
 // protected routes
 router.use('/users', [checkJwt, errHandler, addUserToReq], require('./user'));
+router.use('/projects', [checkJwt, errHandler, addUserToReq], require('./project'));
 
 
 
