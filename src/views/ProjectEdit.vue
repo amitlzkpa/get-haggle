@@ -1,23 +1,17 @@
 <template>
   <div>    
     <v-row>
-      <v-col
-        cols="12"
-        sm="8"
-        xs="12"
-      >
+      <v-col>
         <v-text-field
           v-model="newProjectName"
           label="Project Name"
           :rules="nameRules"
           required
         />
-      </v-col>
-      <v-col
-        cols="12"
-        sm="4"
-        xs="12"
-      >
+        <v-textarea
+          v-model="newProjectDesc"
+          label="Project Description"
+        />
         <v-btn
           block
           color="primary"
@@ -25,15 +19,6 @@
         >
           create
         </v-btn>
-      </v-col>
-    </v-row>
-    
-    <v-row>
-      <v-col>
-        <v-text-field
-          v-model="newProjectDesc"
-          label="Project Description"
-        />
       </v-col>
     </v-row>
   </div>

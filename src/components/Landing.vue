@@ -5,6 +5,12 @@
         <h1 class="display-2 font-weight-bold">
           Vue Starter
         </h1>
+        <v-btn
+          text
+          to="/about"
+        >
+          about
+        </v-btn>
       </v-col>
     </v-row>
 
