@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import About from '@/views/About.vue';
 import Profile from '@/views/Profile.vue';
+import Dashboard from '@/views/Dashboard.vue';
 import Page404 from "@/views/Page404.vue";
 import ProjectEdit from "@/views/ProjectEdit.vue";
 
@@ -34,6 +35,15 @@ const routes =
     component: Profile,
     meta: {
       title: route => "App: Profile",
+      guards: [ guards.authGuard ]
+    }
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: Dashboard,
+    meta: {
+      title: route => "App: Dashboard",
       guards: [ guards.authGuard ]
     }
   },

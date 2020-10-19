@@ -41,9 +41,9 @@
             <v-list-item>
               <v-btn
                 text
-                to="/project/new"
+                to="/dashboard"
               >
-                new project
+                dashboard
               </v-btn>
             </v-list-item>
             <v-list-item>
