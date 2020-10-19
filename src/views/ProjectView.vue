@@ -14,11 +14,13 @@
 export default {
   data() {
     return {
-      project: {
-        name: 'foo',
-        description: 'barr'
-      }
+      project: {}
     }
+  },
+  async mounted() {
+    let id = this.$route.params.id;
+    let res = await this.$api.get(`/api/projects/id/${id}`);
+    this.project = res.data;
   }
 }
 </script>

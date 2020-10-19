@@ -58,7 +58,7 @@ const routes =
     }
   },
   {
-    path: '/project/view',
+    path: '/project/view/:id',
     name: 'view-project',
     component: ProjectView,
     meta: {

@@ -11,7 +11,7 @@
         xs="12"
       >
         <router-link
-          to="/project/view"
+          :to="`/project/view/${project._id}`"
           tag="span"
         >
           <span
