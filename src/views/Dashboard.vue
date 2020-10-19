@@ -8,7 +8,9 @@
       Create New Project
     </v-btn>
 
-    <ProjectList />
+    <ProjectList
+      :projects="projects"
+    />
   </div>
 </template>
 
@@ -18,6 +20,15 @@ import ProjectList from '@/components/ProjectList.vue';
 export default {
   components: {
     ProjectList
+  },
+  data() {
+    return {
+      projects: []
+    };
+  },
+  async mounted() {
+    let res = await this.$api.get("/api/projects/current-user");
+    this.projects = res.data;
   }
 }
 </script>
