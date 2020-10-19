@@ -34,6 +34,27 @@ router.get('/id/:id', async (req, res) => {
 /**
  * @swagger
  * path:
+ *  /api/projects/all:
+ *    get:
+ *      summary: Get all public projects.
+ *      tags: [Projects]
+ *      responses:
+ *        "200":
+ *          description: List of public project entries.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Project'
+ */
+router.get('/all', async (req, res) => {
+  let projects = await Project.find({});
+  return res.json(projects);
+});
+
+
+/**
+ * @swagger
+ * path:
  *  /api/projects/current-user:
  *    get:
  *      summary: Get all projects for current user.

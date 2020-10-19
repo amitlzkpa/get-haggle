@@ -2,9 +2,9 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import About from '@/views/About.vue';
+import Page404 from "@/views/Page404.vue";
 import Profile from '@/views/Profile.vue';
 import Dashboard from '@/views/Dashboard.vue';
-import Page404 from "@/views/Page404.vue";
 import ProjectEdit from "@/views/ProjectEdit.vue";
 
 import guards from '@/router/guards';
