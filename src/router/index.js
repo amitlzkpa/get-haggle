@@ -5,6 +5,7 @@ import About from '@/views/About.vue';
 import Page404 from "@/views/Page404.vue";
 import Profile from '@/views/Profile.vue';
 import Dashboard from '@/views/Dashboard.vue';
+import ProjectView from "@/views/ProjectView.vue";
 import ProjectEdit from "@/views/ProjectEdit.vue";
 
 import guards from '@/router/guards';
@@ -53,6 +54,15 @@ const routes =
     component: ProjectEdit,
     meta: {
       title: route => "App: New Project",
+      guards: [ guards.authGuard ]
+    }
+  },
+  {
+    path: '/project/view',
+    name: 'view-project',
+    component: ProjectView,
+    meta: {
+      title: route => "App: View Project",
       guards: [ guards.authGuard ]
     }
   },

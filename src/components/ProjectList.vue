@@ -10,9 +10,18 @@
         sm="6"
         xs="12"
       >
-        <ProjectCard
-          :project="project"
-        />
+        <router-link
+          to="/project/view"
+          tag="span"
+        >
+          <span
+            class="pointer-icon"
+          >
+            <ProjectCard
+              :project="project"
+            />
+          </span>
+        </router-link>
       </v-col>
     </v-row>
   </div>
@@ -35,5 +44,7 @@ export default {
 </script>
 
 <style scoped>
-
+.pointer-icon {
+  cursor: pointer;
+}
 </style>
