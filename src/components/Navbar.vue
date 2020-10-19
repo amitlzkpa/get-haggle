@@ -1,8 +1,6 @@
 <template>
   <div>
-
     <v-app-bar app color="primary" dense dark>
-        
       <v-btn text to="/">vuestarter</v-btn>
       <v-btn text to="/about">about</v-btn>
 
@@ -14,9 +12,7 @@
         <v-btn text @click="login" v-if="!$auth.isAuthenticated">log in</v-btn>
         <v-btn text @click="logout" v-if="$auth.isAuthenticated">log out</v-btn>
       </span>
-
     </v-app-bar>
-
   </div>
 </template>
 

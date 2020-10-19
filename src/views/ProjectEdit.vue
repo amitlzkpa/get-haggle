@@ -1,13 +1,5 @@
 <template>
-  <div>
-    <v-row>
-      <v-col>
-        <h1 class="display-2 font-weight-bold">
-          Vuestarter
-        </h1>
-      </v-col>
-    </v-row>
-    
+  <div>    
     <v-row>
       <v-col
         cols="12"

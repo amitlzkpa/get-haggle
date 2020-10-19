@@ -4,7 +4,7 @@ import Home from '@/views/Home.vue';
 import About from '@/views/About.vue';
 import Profile from '@/views/Profile.vue';
 import Page404 from "@/views/Page404.vue";
-import ProjectNew from "@/components/ProjectNew.vue";
+import ProjectEdit from "@/views/ProjectEdit.vue";
 
 import guards from '@/router/guards';
 
@@ -40,7 +40,7 @@ const routes =
   {
     path: '/project/new',
     name: 'new-project',
-    component: ProjectNew,
+    component: ProjectEdit,
     meta: {
       title: route => "App: New Project",
       guards: [ guards.authGuard ]
