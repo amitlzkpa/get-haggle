@@ -1,16 +1,70 @@
 <template>
   <div>
-    <v-app-bar app color="primary" dense dark>
-      <v-btn text to="/">vuestarter</v-btn>
-      <v-btn text to="/about">about</v-btn>
+    <v-app-bar
+      color="primary"
+      app
+      dense
+      dark
+    >
+      <router-link to="/">
+        <v-toolbar-title class="white--text mr-2">
+          Vue Starter
+        </v-toolbar-title>
+      </router-link>
 
-      <v-spacer></v-spacer>
+      <v-spacer />
 
       <span v-if="!$auth.loading">
-        <v-btn text to="/project/new" v-if="$auth.isAuthenticated">new project</v-btn>
-        <v-btn text to="/profile" v-if="$auth.isAuthenticated">profile</v-btn>
-        <v-btn text @click="login" v-if="!$auth.isAuthenticated">log in</v-btn>
-        <v-btn text @click="logout" v-if="$auth.isAuthenticated">log out</v-btn>
+        <v-btn
+          v-if="!$auth.isAuthenticated"
+          text
+          @click="login"
+        >
+          log in
+        </v-btn>
+
+        <v-menu
+          v-else
+          offset-y
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-avatar size="36">
+              <img
+                :src="$auth.auth0User.picture"
+                :alt="$auth.auth0User.nickname"
+                v-bind="attrs"
+                v-on="on"
+              >
+            </v-avatar>
+          </template>
+          <v-list>
+            <v-list-item>
+              <v-btn
+                text
+                to="/project/new"
+              >
+                new project
+              </v-btn>
+            </v-list-item>
+            <v-list-item>
+              <v-btn
+                text
+                to="/profile"
+              >
+                profile
+              </v-btn>
+            </v-list-item>
+            <v-list-item>
+              <v-btn
+                text
+                @click="logout"
+              >
+                log out
+              </v-btn>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
       </span>
     </v-app-bar>
   </div>
