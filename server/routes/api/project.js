@@ -47,7 +47,7 @@ router.get('/id/:id', async (req, res) => {
  *                $ref: '#/components/schemas/Project'
  */
 router.get('/all', async (req, res) => {
-  let projects = await Project.find({});
+  let projects = await Project.find({ public: true });
   return res.json(projects);
 });
 
@@ -68,7 +68,7 @@ router.get('/all', async (req, res) => {
  *                $ref: '#/components/schemas/Project'
  */
 router.get('/current-user', async (req, res) => {
-  let projects = await Project.find({user: req.dbUser});
+  let projects = await Project.find({ user: req.dbUser });
   return res.json(projects);
 });
 

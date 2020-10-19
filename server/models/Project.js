@@ -15,6 +15,10 @@ const ProjectSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User"
+  },
+  public: {
+    type: Boolean,
+    default: false
   }
 }, {timestamps: true});
 
