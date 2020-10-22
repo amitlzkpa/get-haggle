@@ -2,6 +2,16 @@
   <div>    
     <v-row>
       <v-col>
+        <v-toolbar flat>
+          <v-spacer />
+          <v-btn
+            v-if="project.user === $auth.dbUser._id"
+            :to="`/project/edit/${project._id}`"
+            text
+          >
+            edit
+          </v-btn>
+        </v-toolbar>
         <h1>{{ project.name }}</h1>
         <p>{{ project.description }}</p>
       </v-col>

@@ -58,6 +58,15 @@ const routes =
     }
   },
   {
+    path: '/project/edit/:id',
+    name: 'edit-project',
+    component: ProjectEdit,
+    meta: {
+      title: route => "App: Edit Project",
+      guards: [ guards.authGuard ]
+    }
+  },
+  {
     path: '/project/view/:id',
     name: 'view-project',
     component: ProjectView,
