@@ -18,6 +18,12 @@
           <v-spacer />
           <v-btn
             text
+            :to="`/profile/view/${$auth.dbUser._id}`"
+          >
+            view
+          </v-btn>
+          <v-btn
+            text
             @click="update"
           >
             update

@@ -38,7 +38,7 @@
             </v-avatar>
           </template>
           <v-list>
-            <v-list-item to="/profile">
+            <v-list-item :to="`/profile/edit/${$auth.dbUser._id}`">
               {{ $auth.dbUser.name }}
             </v-list-item>
             <v-list-item to="/dashboard">

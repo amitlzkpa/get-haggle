@@ -3,7 +3,8 @@ import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import About from '@/views/About.vue';
 import Page404 from "@/views/Page404.vue";
-import Profile from '@/views/Profile.vue';
+import ProfileView from '@/views/ProfileView.vue';
+import ProfileEdit from '@/views/ProfileEdit.vue';
 import Dashboard from '@/views/Dashboard.vue';
 import ProjectView from "@/views/ProjectView.vue";
 import ProjectEdit from "@/views/ProjectEdit.vue";
@@ -31,20 +32,29 @@ const routes =
     },
   },
   {
-    path: '/profile',
-    name: 'profile',
-    component: Profile,
-    meta: {
-      title: route => "App: Profile",
-      guards: [ guards.authGuard ]
-    }
-  },
-  {
     path: '/dashboard',
     name: 'dashboard',
     component: Dashboard,
     meta: {
       title: route => "App: Dashboard",
+      guards: [ guards.authGuard ]
+    }
+  },
+  {
+    path: '/profile/view/:id',
+    name: 'view-profile',
+    component: ProfileView,
+    meta: {
+      title: route => "App: User Profile",
+      guards: [ guards.authGuard ]
+    }
+  },
+  {
+    path: '/profile/edit/:id',
+    name: 'edit-profile',
+    component: ProfileEdit,
+    meta: {
+      title: route => "App: Edit User Profile",
       guards: [ guards.authGuard ]
     }
   },
