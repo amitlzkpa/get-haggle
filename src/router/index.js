@@ -73,7 +73,7 @@ const routes =
     component: ProjectEdit,
     meta: {
       title: route => "App: Edit Project",
-      guards: [ guards.authGuard ]
+      guards: [ guards.authGuard, guards.projectEditGuard ]
     }
   },
   {

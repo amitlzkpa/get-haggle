@@ -4,12 +4,12 @@ import 'vuetify/dist/vuetify.min.css';
 import App from '@/App.vue';
 import router from '@/router';
 import store from '@/store';
-import axios from 'axios';
+import api from '@/api';
 
-Vue.prototype.$api = axios.create();
+Vue.prototype.$api = api;
 
 Vue.prototype.wait = async function(ms) {
-	return new Promise((resolve) => setTimeout(() => resolve(), ms));
+  return new Promise((resolve) => setTimeout(() => resolve(), ms));
 }
 
 import { Auth0Plugin } from "./auth";
@@ -42,6 +42,7 @@ async function main() {
     el: '#app',
     store,
     router,
+    api,
     vuetify,
     render: h => h(App),
   });

@@ -1,4 +1,6 @@
-// import store from '@/store';
+
+import api from '@/api';
+import { getInstance } from '@/auth';
 import { authGuard } from "@/auth/authGuard";
 
 
@@ -14,7 +16,16 @@ function pipeline(to, from, final, guards) {
 }
 
 
+async function projectEditGuard(to, from, next) {
+  const authService = getInstance();
+  let p = await api.get(`/api/projects/id/${to.params.id}`)
+  if (p.data.user === authService.dbUser._id) return next();
+  else return next(false);
+}
+
+
 export default {
   pipeline,
-  authGuard
+  authGuard,
+  projectEditGuard
 };
