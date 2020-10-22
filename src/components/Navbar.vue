@@ -38,29 +38,18 @@
             </v-avatar>
           </template>
           <v-list>
-            <v-list-item>
-              <v-btn
-                text
-                to="/dashboard"
-              >
-                dashboard
-              </v-btn>
+            <v-list-item to="/profile">
+              {{ $auth.dbUser.name }}
             </v-list-item>
-            <v-list-item>
-              <v-btn
-                text
-                to="/profile"
-              >
-                profile
-              </v-btn>
+            <v-list-item to="/dashboard">
+              <v-list-item-title>
+                Dashboard
+              </v-list-item-title>
             </v-list-item>
-            <v-list-item>
-              <v-btn
-                text
-                @click="logout"
-              >
-                log out
-              </v-btn>
+            <v-list-item @click="logout">
+              <v-list-item-title>
+                Logout
+              </v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
