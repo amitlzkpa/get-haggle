@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div
       class="d-flex"
     >
@@ -10,11 +9,20 @@
         class="ma-2"
         :aspect-ratio="1"
         :src="$auth.auth0User.picture"
-      ></v-img>
+      />
       
       <div
-       class="flex-grow-1"
+        class="flex-grow-1"
       >
+        <v-toolbar flat>
+          <v-spacer />
+          <v-btn
+            text
+            @click="update"
+          >
+            update
+          </v-btn>
+        </v-toolbar>
         <form>
           <v-text-field
             v-model="name"
@@ -23,7 +31,7 @@
             required
             @input="$v.name.$touch()"
             @blur="$v.name.$touch()"
-          ></v-text-field>
+          />
           <v-text-field
             v-model="email"
             :error-messages="emailErrors"
@@ -31,18 +39,10 @@
             required
             @input="$v.email.$touch()"
             @blur="$v.email.$touch()"
-          ></v-text-field>
-
-          <v-btn
-            class="mr-4"
-            @click="update"
-          >
-            update
-          </v-btn>
+          />
         </form>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -52,22 +52,14 @@ import { required, email } from 'vuelidate/lib/validators';
 
 export default {
   mixins: [validationMixin],
-
   validations: {
     name: { required },
     email: { required, email }
   },
-
   data: () => ({
     name: '',
     email: ''
   }),
-
-  mounted() {
-    this.name = this.$auth.dbUser.name;
-    this.email = this.$auth.dbUser.email;
-  },
-
   computed: {
     nameErrors () {
       const errors = [];
@@ -83,7 +75,10 @@ export default {
       return errors;
     },
   },
-  
+  mounted() {
+    this.name = this.$auth.dbUser.name;
+    this.email = this.$auth.dbUser.email;
+  },
   methods: {
     async update () {
       this.$v.$touch();
@@ -95,7 +90,6 @@ export default {
       this.$auth.dbUser = res.data;
     }
   }
-
 }
 </script>
 
