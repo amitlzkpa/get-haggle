@@ -132,10 +132,10 @@ router.post('/', async (req, res) => {
  */
 router.put('/', async (req, res) => {
   const p = req.body;
-  if (!p || p === {} || !p.id) {
+  if (!p || p === {} || !p._id) {
     return res.status(400).send();
   }
-  let project = await Project.findOne({_id: p.id});
+  let project = await Project.findOne({_id: p._id});
   project.name = p.name || project.name;
   project.description = p.description || project.description;
   project = await project.save();
