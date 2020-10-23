@@ -86,6 +86,13 @@ const routes =
     }
   },
   {
+    path: "/404",
+    component: Page404,
+    meta: {
+      title: route => "App: Unknown"
+    }
+  },
+  {
     path: "*",
     component: Page404,
     meta: {

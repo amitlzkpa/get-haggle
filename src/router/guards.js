@@ -20,7 +20,7 @@ async function projectEditGuard(to, from, next) {
   const authService = getInstance();
   let p = await api.get(`/api/projects/id/${to.params.id}`)
   if (p.data.user === authService.dbUser._id) return next();
-  else return next(false);
+  else return next({ path: "/404" });
 }
 
 
