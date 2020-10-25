@@ -31,6 +31,14 @@ router.get('/id/:id', async (req, res) => {
 });
 
 
+router.delete('/id/:id', async (req, res) => {
+  let id = req.params.id;
+  let project = await Project.findOne({_id: id});
+  let del = await project.delete();
+  return res.json(del);
+});
+
+
 /**
  * @swagger
  * path:

@@ -17,7 +17,16 @@
           color="primary"
           @click="onClickNewProject"
         >
-          {{ (project._id) ? 'edit' : 'create' }}
+          {{ (project._id) ? 'save' : 'create' }}
+        </v-btn>
+        <v-btn
+          v-if="project._id"
+          block
+          color="error"
+          class="mt-2"
+          @click="onClickDeleteProject"
+        >
+          delete
         </v-btn>
       </v-col>
     </v-row>
@@ -54,6 +63,10 @@ export default {
         p = await this.$api.put("/api/projects/", this.project);
       }
       console.log(p.data);
+    },
+    async onClickDeleteProject() {
+      let p = await this.$api.delete(`/api/projects/id/${this.project._id}`);
+      this.$router.push("/dashboard");
     }
   }
 }
