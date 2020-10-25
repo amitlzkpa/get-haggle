@@ -9,6 +9,7 @@
     </v-btn>
 
     <ProjectList
+      class="pt-2"
       :projects="projects"
     />
   </div>

@@ -1,18 +1,20 @@
 <template>
   <v-card>
     <v-img
-      src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+      src="/imgs/img.png"
       height="200px"
     />
 
     <v-card-title>
-      {{ project.name }}
+      <div class="text-truncate">
+        {{ project.name }}
+      </div>
     </v-card-title>
 
-    <v-card-subtitle
-      text-truncate
-    >
-      {{ project.description }}
+    <v-card-subtitle>
+      <div class="text-truncate">
+        {{ project.description }}
+      </div>
     </v-card-subtitle>
   </v-card>
 </template>
