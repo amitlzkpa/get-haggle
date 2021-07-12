@@ -24,7 +24,6 @@ export default {
     };
 
     let scriptUrl = `${BASE_PATH}square-snippet.js`;
-    console.log(scriptUrl);
     script.src = scriptUrl;
     c.appendChild(script);
   }

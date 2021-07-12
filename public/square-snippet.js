@@ -151,8 +151,12 @@ async function main() {
 }
 
 async function render() {
+  let d = document.getElementById("square-snippet-container");
+  if (d) {
+    d.remove();
+  }
   let div = document.createElement("div");
-  div.id = "container";
+  div.id = "square-snippet-container";
   div.innerHTML = containerHtml;
   div.setAttribute("style", containerCss);
   await wait(0);
@@ -198,6 +202,7 @@ async function enterPool() {
   };
   let res = await axios.post(fullPath, postBody);
   console.log(res.data);
+  await render();
 }
 
 async function exitPool() {
@@ -208,6 +213,7 @@ async function exitPool() {
   };
   let res = await axios.post(fullPath, postBody);
   console.log(res.data);
+  await render();
 }
 
 main();
