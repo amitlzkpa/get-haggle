@@ -31,14 +31,19 @@ function getOrdinal(num) {
 // ------------------------------------
 
 let jsLibs = ["https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"];
+let styleLibs = [
+  "http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800",
+];
 
 // ref: https://gist.github.com/james2doyle/28a59f8692cec6f334773007b31a1523
-function loadScript(src) {
+function loadScript(src, idx) {
   return new Promise(function(resolve, reject) {
+    let scrElId = `script_${idx}`;
     const s = document.createElement("script");
     let r = false;
-    s.type = "text/javascript";
-    s.src = src;
+    s.setAttribute("id", scrElId);
+    s.setAttribute("type", "text/javascript");
+    s.setAttribute("src", src);
     s.async = true;
     s.onerror = function(err) {
       reject(err, s);
@@ -55,9 +60,38 @@ function loadScript(src) {
   });
 }
 
-async function loadJsLibs() {
-  for (let jsLibUrl of jsLibs) {
-    await loadScript(jsLibUrl);
+// ref: https://gist.github.com/james2doyle/28a59f8692cec6f334773007b31a1523
+function loadStyle(href, idx = 0) {
+  return new Promise(function(resolve, reject) {
+    let linkElId = `stylesheet_${idx}`;
+    const s = document.createElement("link");
+    s.setAttribute("id", linkElId);
+    s.setAttribute("type", "text/css");
+    s.setAttribute("href", href);
+    let r = false;
+    s.onerror = function(err) {
+      reject(err, s);
+    };
+    s.onload = s.onreadystatechange = function() {
+      // console.log(this.readyState); // uncomment this line to see which ready states are called.
+      if (!r && (!this.readyState || this.readyState == "complete")) {
+        r = true;
+        resolve();
+      }
+    };
+    const t = document.getElementsByTagName("link")[0];
+    t.parentElement.insertBefore(s, t);
+  });
+}
+
+async function loadLibs() {
+  // for (let idx in styleLibs) {
+  //   let cssLibUrl = styleLibs[idx];
+  //   await loadStyle(cssLibUrl, idx);
+  // }
+  for (let idx in jsLibs) {
+    let jsLibUrl = jsLibs[idx];
+    await loadScript(jsLibUrl, idx);
   }
 }
 
@@ -176,16 +210,16 @@ let containerHtmlTemplate = `
     <a
       href="{MAIN_URL}"
       target="_blank"
-      style="color: #dedede; cursor: pointer; text-decoration: none"
+      style="color: #666666; cursor: pointer; text-decoration: none"
     >More info</a>
     <div style="display:{DISP_SHOW_REFRESH}">
-      <span style="color: #dedede; cursor: pointer" onclick="refresh()">Refresh</span>
+      <span style="color: #666666; cursor: pointer" onclick="refresh()">Refresh</span>
     </div>
   </p>
 `;
 
 async function main() {
-  await loadJsLibs();
+  await loadLibs();
   syncCookie();
 
   // await onEnter();
