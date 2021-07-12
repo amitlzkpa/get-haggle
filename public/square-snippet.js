@@ -158,15 +158,15 @@ let containerHtmlTemplate = `
       <br />
       We need <b>{REM_MEMBER_COUNT}</b> more
     </div>
-    <div style="display:{DISP_SHOW_REFRESH}">
-      <span style="color: blue; cursor: pointer" onclick="refresh()">Refresh</span>
-    </div>
     <div>
       <span style="color: blue; cursor: pointer; display:{DISP_HAS_NOT_JOINED_POOL}" onclick="enterPool()">Click here</span> to join
       <br />
-      <span style="color: red; cursor: pointer;  display:{DISP_HAS_JOINED_POOL}" onclick="exitPool()">Exit</span>
+      <span style="cursor: pointer;  display:{DISP_HAS_JOINED_POOL}" onclick="exitPool()">Exit</span>
     </div>
     <span style="color: #dedede; cursor: pointer">More info</span>
+    <div style="display:{DISP_SHOW_REFRESH}">
+      <span style="color: #dedede; cursor: pointer" onclick="refresh()">Refresh</span>
+    </div>
   </p>
 `;
 
@@ -194,7 +194,7 @@ async function render() {
   let CURR_MEMBER_COUNT = stats.pool.CURR_MEMBER_COUNT;
   let REM_MEMBER_COUNT = TARGET_COUNT - CURR_MEMBER_COUNT;
   let POOL_COMPLETED_PERCENTAGE = (CURR_MEMBER_COUNT * 100) / TARGET_COUNT;
-  let showRefresh = true;
+  let showRefresh = false;
   let hasJoinedPool = false;
   let DISP_SHOW_REFRESH = getDispProp(showRefresh);
   let DISP_HAS_JOINED_POOL = getDispProp(hasJoinedPool);
