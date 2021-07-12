@@ -100,7 +100,7 @@ router.post("/pool-stats", function(req, res) {
   }
 
   let TARGET_COUNT = 20;
-  let CURR_MEMBER_COUNT = cookieArr.length;
+  let CURR_MEMBER_COUNT = cookieArr.length + 12;
   let HAS_JOINED_POOL = cookieArr.includes(cookie);
 
   let stats = {

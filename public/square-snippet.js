@@ -208,7 +208,7 @@ let containerHtmlTemplate = `
     <div>
       <span style="color: blue; cursor: pointer; display:{DISP_HAS_NOT_JOINED_POOL}" onclick="enterPool()">Click here</span> to join
       <br />
-      <span style="cursor: pointer;  display:{DISP_HAS_JOINED_POOL}" onclick="exitPool()">Exit</span>
+      <span style="cursor: pointer;  display:{DISP_HAS_JOINED_POOL}" onclick="exitPool()">Leave the pool</span>
     </div>
     <a
       href="{MAIN_URL}"
