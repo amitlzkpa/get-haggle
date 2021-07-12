@@ -152,11 +152,14 @@ let containerHtmlTemplate = `
     <br />
     <b>{CURR_MEMBER_COUNT}</b> have already signed up. We need {REM_MEMBER_COUNT} more
     <br />
-    <span style="color: blue; cursor: pointer" onclick="refresh()">Refresh</span>
-    <br />
-    <span style="color: blue; cursor: pointer" onclick="enterPool()">Click here</span> to join
-    <br />
-    <span style="color: red; cursor: pointer" onclick="exitPool()">Exit</span>
+    <div style="display:{DISP_IS_REFRESHING}">
+      <span style="color: blue; cursor: pointer" onclick="refresh()">Refresh</span>
+    </div>
+    <div style="display:{DISP_IS_NOT_REFRESHING}">
+      <span style="color: blue; cursor: pointer; display:{DISP_HAS_JOINED_POOL}" onclick="enterPool()">Click here</span> to join
+      <br />
+      <span style="color: red; cursor: pointer;  display:{DISP_HAS_NOT_JOINED_POOL}" onclick="exitPool()">Exit</span>
+    </div>
     <br />
     <span style="color: #dedede; cursor: pointer">More info</span>
   </p>
@@ -184,13 +187,21 @@ async function render() {
   let CURR_MEMBER_COUNT = stats.pool.CURR_MEMBER_COUNT;
   let REM_MEMBER_COUNT = TARGET_COUNT - CURR_MEMBER_COUNT;
   let POOL_COMPLETED_PERCENTAGE = (CURR_MEMBER_COUNT * 100) / TARGET_COUNT;
+  let DISP_IS_REFRESHING = "none";
+  let DISP_IS_NOT_REFRESHING = "contents";
+  let DISP_HAS_JOINED_POOL = "content";
+  let DISP_HAS_NOT_JOINED_POOL = "none";
 
   let containerHtmlContent = containerHtmlTemplate
     .replace(/{NEXT_MEMBER_COUNT}/g, NEXT_MEMBER_COUNT)
     .replace(/{NEXT_MEMBER_COUNT_ORDINAL}/g, NEXT_MEMBER_COUNT_ORDINAL)
     .replace(/{CURR_MEMBER_COUNT}/g, CURR_MEMBER_COUNT)
     .replace(/{REM_MEMBER_COUNT}/g, REM_MEMBER_COUNT)
-    .replace(/{POOL_COMPLETED_PERCENTAGE}/g, POOL_COMPLETED_PERCENTAGE);
+    .replace(/{POOL_COMPLETED_PERCENTAGE}/g, POOL_COMPLETED_PERCENTAGE)
+    .replace(/{DISP_IS_REFRESHING}/g, DISP_IS_REFRESHING)
+    .replace(/{DISP_IS_NOT_REFRESHING}/g, DISP_IS_NOT_REFRESHING)
+    .replace(/{DISP_HAS_JOINED_POOL}/g, DISP_HAS_JOINED_POOL)
+    .replace(/{DISP_HAS_NOT_JOINED_POOL}/g, DISP_HAS_NOT_JOINED_POOL);
 
   let div = document.createElement("div");
   div.id = "square-snippet-container";
