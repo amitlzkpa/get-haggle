@@ -170,8 +170,8 @@ async function main() {
   await loadJsLibs();
   syncCookie();
 
-  await onEnter();
-  window.addEventListener("beforeunload", onExit);
+  // await onEnter();
+  // window.addEventListener("beforeunload", onExit);
 
   let div = document.createElement("div");
   div.id = "container";
@@ -186,12 +186,13 @@ async function onUserClick() {
   console.log(productPageUrl);
 
   let fullPath = `${BASE_PATH}/api/test`;
-  let res;
   console.log(fullPath);
-  res = await axios.get(fullPath);
-  console.log(res.data);
-  res = await axios.post(fullPath);
-  console.log(res.data);
+  // let res;
+  // console.log(fullPath);
+  // res = await axios.get(fullPath);
+  // console.log(res.data);
+  // res = await axios.post(fullPath);
+  // console.log(res.data);
 }
 
 main();
