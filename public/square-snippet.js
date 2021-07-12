@@ -155,12 +155,11 @@ let containerHtmlTemplate = `
     <div style="display:{DISP_IS_REFRESHING}">
       <span style="color: blue; cursor: pointer" onclick="refresh()">Refresh</span>
     </div>
-    <div style="display:{DISP_IS_NOT_REFRESHING}">
-      <span style="color: blue; cursor: pointer; display:{DISP_HAS_JOINED_POOL}" onclick="enterPool()">Click here</span> to join
+    <div>
+      <span style="color: blue; cursor: pointer; display:{DISP_HAS_NOT_JOINED_POOL}" onclick="enterPool()">Click here</span> to join
       <br />
-      <span style="color: red; cursor: pointer;  display:{DISP_HAS_NOT_JOINED_POOL}" onclick="exitPool()">Exit</span>
+      <span style="color: red; cursor: pointer;  display:{DISP_HAS_JOINED_POOL}" onclick="exitPool()">Exit</span>
     </div>
-    <br />
     <span style="color: #dedede; cursor: pointer">More info</span>
   </p>
 `;
@@ -189,8 +188,8 @@ async function render() {
   let POOL_COMPLETED_PERCENTAGE = (CURR_MEMBER_COUNT * 100) / TARGET_COUNT;
   let DISP_IS_REFRESHING = "none";
   let DISP_IS_NOT_REFRESHING = "contents";
-  let DISP_HAS_JOINED_POOL = "content";
-  let DISP_HAS_NOT_JOINED_POOL = "none";
+  let DISP_HAS_JOINED_POOL = "none";
+  let DISP_HAS_NOT_JOINED_POOL = "content";
 
   let containerHtmlContent = containerHtmlTemplate
     .replace(/{NEXT_MEMBER_COUNT}/g, NEXT_MEMBER_COUNT)
