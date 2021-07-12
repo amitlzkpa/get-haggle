@@ -66,7 +66,7 @@ router.post("/room-enter", function(req, res) {
     currRooms[roomUrl] = [];
     pplArr = currRooms[roomUrl];
   }
-  pplArr.push(cookie);
+  if (!pplArr.includes(cookie)) pplArr.push(cookie);
   console.log(JSON.stringify(currRooms, null, 2));
   return res.send(currRooms);
 });
