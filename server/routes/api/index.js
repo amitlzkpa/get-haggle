@@ -101,11 +101,13 @@ router.post("/pool-stats", function(req, res) {
 
   let TARGET_COUNT = 20;
   let CURR_MEMBER_COUNT = cookieArr.length;
+  let HAS_JOINED_POOL = cookieArr.includes(cookie);
 
   let stats = {
     pool: {
       TARGET_COUNT,
       CURR_MEMBER_COUNT,
+      HAS_JOINED_POOL,
     },
   };
   return res.send(stats);

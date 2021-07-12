@@ -166,7 +166,7 @@ let containerHtmlTemplate = `
     <a
       href="{MAIN_URL}"
       target="_blank"
-      style="color: #dedede; cursor: pointer"
+      style="color: #dedede; cursor: pointer; text-decoration: none"
     >More info</a>
     <div style="display:{DISP_SHOW_REFRESH}">
       <span style="color: #dedede; cursor: pointer" onclick="refresh()">Refresh</span>
@@ -198,11 +198,9 @@ async function render() {
   let CURR_MEMBER_COUNT = stats.pool.CURR_MEMBER_COUNT;
   let REM_MEMBER_COUNT = TARGET_COUNT - CURR_MEMBER_COUNT;
   let POOL_COMPLETED_PERCENTAGE = (CURR_MEMBER_COUNT * 100) / TARGET_COUNT;
-  let showRefresh = false;
-  let hasJoinedPool = false;
   let DISP_SHOW_REFRESH = getDispProp(showRefresh);
-  let DISP_HAS_JOINED_POOL = getDispProp(hasJoinedPool);
-  let DISP_HAS_NOT_JOINED_POOL = getDispProp(!hasJoinedPool);
+  let DISP_HAS_JOINED_POOL = getDispProp(stats.pool.HAS_JOINED_POOL);
+  let DISP_HAS_NOT_JOINED_POOL = getDispProp(!stats.pool.HAS_JOINED_POOL);
   let MAIN_URL = BASE_PATH;
 
   let containerHtmlContent = containerHtmlTemplate
@@ -260,10 +258,14 @@ async function onExit() {
 // POOL FEATURES
 // ------------------------------------
 
+let showRefresh = false;
+let hasJoinedPool = false;
+
 let stats = {
   pool: {
     TARGET_COUNT: 20,
     CURR_MEMBER_COUNT: 16,
+    HAS_JOINED_POOL: false,
   },
 };
 
