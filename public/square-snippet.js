@@ -237,6 +237,7 @@ let containerHtmlTemplate = `
 `;
 
 async function main() {
+  if (!window.location.pathname.contains("product")) return;
   await loadLibs();
   syncCookie();
 
