@@ -100,7 +100,6 @@ function syncCookie() {
 // ------------------------------------
 
 async function onEnter() {
-  console.log("enter");
   let fullPath = `${BASE_PATH}/api/room-enter`;
   let postBody = {
     cookie: haggleCookieVal,
@@ -182,7 +181,6 @@ async function main() {
 }
 
 async function enterPool() {
-  console.log("enter pool");
   let fullPath = `${BASE_PATH}/api/pool-enter`;
   let postBody = {
     cookie: haggleCookieVal,
@@ -190,7 +188,6 @@ async function enterPool() {
   };
   let res = await axios.post(fullPath, postBody);
   console.log(res.data);
-  console.log("-------------------");
 }
 
 main();
