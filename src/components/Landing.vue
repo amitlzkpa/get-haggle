@@ -2,24 +2,13 @@
   <div>
     <v-row>
       <v-col>
-        <h1 class="display-2 font-weight-bold">Haggle</h1>
-        <v-btn text to="/about"> about </v-btn>
+        <h1 style="font-size: 72px" class="font-weight-light">Haggle</h1>
+        <p>Get together and get discounts</p>
       </v-col>
     </v-row>
 
     <v-row>
-      <v-col>
-        <v-img src="/imgs/img.png" class="my-3" contain height="200" />
-        <v-btn class="primary" block @click="onTestPublicRoute">
-          Test public API route
-        </v-btn>
-        <span>{{ publicRouteMsg }}</span>
-        <br />
-        <v-btn class="primary" block @click="onTestProtectedRoute">
-          Test protected User API route
-        </v-btn>
-        <span>{{ protectedRouteMsg }}</span>
-      </v-col>
+      <v-col> </v-col>
     </v-row>
   </div>
 </template>
