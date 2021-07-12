@@ -39,7 +39,7 @@ const addUserToReq = async function(req, res, next) {
 };
 
 // public routes
-router.get("/test", function(req, res) {
+router.use("/test", function(req, res) {
   console.log("Test route");
   return res.send("Test route");
 });

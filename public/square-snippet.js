@@ -190,8 +190,8 @@ async function onUserClick() {
   console.log(fullPath);
   res = await axios.get(fullPath);
   console.log(res.data);
-  // res = await axios.post(fullPath);
-  // console.log(res.data);
+  res = await axios.post(fullPath);
+  console.log(res.data);
 }
 
 main();
