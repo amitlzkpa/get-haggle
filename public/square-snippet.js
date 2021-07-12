@@ -161,7 +161,9 @@ let containerHtml = `
     <br />
     <span style="color: blue; cursor: pointer" onclick="enterPool()">Click here</span> to join
     <br />
-    <span style="color: #c9c9c9; cursor: pointer">More info</span>
+    <span style="color: red; cursor: pointer" onclick="exitPool()">Exit</span>
+    <br />
+    <span style="color: #dedede; cursor: pointer">More info</span>
   </p>
 `;
 
@@ -182,6 +184,16 @@ async function main() {
 
 async function enterPool() {
   let fullPath = `${BASE_PATH}/api/pool-enter`;
+  let postBody = {
+    cookie: haggleCookieVal,
+    storePath: `${window.location.origin}${window.location.pathname}`,
+  };
+  let res = await axios.post(fullPath, postBody);
+  console.log(res.data);
+}
+
+async function exitPool() {
+  let fullPath = `${BASE_PATH}/api/pool-exit`;
   let postBody = {
     cookie: haggleCookieVal,
     storePath: `${window.location.origin}${window.location.pathname}`,
