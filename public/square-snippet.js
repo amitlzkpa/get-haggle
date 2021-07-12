@@ -24,16 +24,16 @@ let jsLibs = ["https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"];
 
 // ref: https://gist.github.com/james2doyle/28a59f8692cec6f334773007b31a1523
 function loadScript(src) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function(resolve, reject) {
     const s = document.createElement("script");
     let r = false;
     s.type = "text/javascript";
     s.src = src;
     s.async = true;
-    s.onerror = function (err) {
+    s.onerror = function(err) {
       reject(err, s);
     };
-    s.onload = s.onreadystatechange = function () {
+    s.onload = s.onreadystatechange = function() {
       // console.log(this.readyState); // uncomment this line to see which ready states are called.
       if (!r && (!this.readyState || this.readyState == "complete")) {
         r = true;
@@ -129,7 +129,7 @@ async function onExit() {
 
 let devMode = window.location.origin.toLowerCase().includes("localhost");
 
-let BASE_PATH = devMode ? "" : "https://get-haggle.web.app";
+let BASE_PATH = devMode ? "" : "https://get-haggle.herokuapp.com";
 
 let containerCss = `
   font-family: 'Roboto';

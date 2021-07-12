@@ -7,7 +7,9 @@
 
 <script>
 let BASE_PATH =
-  process.env.NODE_ENV === "development" ? "/" : "https://get-haggle.web.app/";
+  process.env.NODE_ENV === "development"
+    ? "/"
+    : "https://get-haggle.herokuapp.com/";
 
 export default {
   data() {
