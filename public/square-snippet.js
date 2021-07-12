@@ -134,17 +134,29 @@ let containerHtmlTemplate = `
     Work towards <b>30% discount</b>
   </p>
   <div>
-    <div style="width: 100%">
+    <div style="width: 100%; height: 4px; position: relative; margin-bottom: 10px;">
       <div
         style="
-          height: 6px;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-color: #dedede;
+          border-radius: 2px;
+        "
+      ></div>
+      <div
+        style="
           width: {POOL_COMPLETED_PERCENTAGE}%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
           background-color: green;
           border-radius: 2px;
-          margin-bottom: 10px;
         "
-      >
-      </div>
+      ></div>
     </div>
   </div>
   <p>
