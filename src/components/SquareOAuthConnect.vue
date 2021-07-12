@@ -2,15 +2,10 @@
   <div class="d-flex py-4">
     <a
       v-if="!hasSquareLinked"
-      :href="`https://connect.squareupsandbox.com/oauth2/authorize?client_id=${env.SQUARE_CLIENT_ID}&scope=MERCHANT_PROFILE_READ+ONLINE_STORE_SITE_READ+ONLINE_STORE_SNIPPETS_READ+ONLINE_STORE_SNIPPETS_WRITE%state=foo`"
+      :href="`https://connect.squareupsandbox.com/oauth2/authorize?client_id=${env.SQUARE_CLIENT_ID}&scope=MERCHANT_PROFILE_READ+ONLINE_STORE_SITE_READ+ONLINE_STORE_SNIPPETS_READ+ONLINE_STORE_SNIPPETS_WRITE`"
       target="_blank"
     >
-      <v-img
-        max-height="200"
-        max-width="400"
-        class="ma-2"
-        src="/imgs/img.png"
-      />
+      <v-img height="60" width="240" class="ma-2" src="/imgs/square-logo.svg" />
     </a>
 
     <div class="flex-grow-1 pt-4 ml-4">
@@ -33,11 +28,11 @@ export default {
     }
   },
   async mounted() {
-    if (this.$route.query.state !== "foo") return;
+    if (!this.$route.query.code) return;
     let postData = {
-      authCode: this.$route.query.code,
-      redirectUri: `https://get-haggle.herokuapp.com/oauth-redirect`
+      authCode: this.$route.query.code
     };
+    console.log(postData);
     let res = await this.$api.post("/api/users/connect-square", postData);
     // this.$auth.dbUser = res.data;
     console.log(res.data);
