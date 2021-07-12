@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+const cors = require("cors");
 
 const DIR = "build";
 const PORT = process.env.PORT || 8080;
@@ -12,6 +13,7 @@ const mongoURI = process.env.MONGO_URL;
 mongoose.connect(mongoURI, { useNewUrlParser: true });
 
 const app = express();
+app.use(cors());
 app.use(express.static(DIR));
 
 app.use(cookieParser());
