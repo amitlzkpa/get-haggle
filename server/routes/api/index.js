@@ -100,14 +100,16 @@ router.post("/pool-stats", function(req, res) {
   }
 
   let TARGET_COUNT = 20;
-  let CURR_MEMBER_COUNT = cookieArr.length + 12;
+  let CURR_MEMBER_COUNT = cookieArr.length + 16;
   let HAS_JOINED_POOL = cookieArr.includes(cookie);
+  let IS_DONE = CURR_MEMBER_COUNT >= TARGET_COUNT;
 
   let stats = {
     pool: {
       TARGET_COUNT,
       CURR_MEMBER_COUNT,
       HAS_JOINED_POOL,
+      IS_DONE,
     },
   };
   return res.send(stats);

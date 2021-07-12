@@ -89,7 +89,6 @@ function loadStyle(href, idx = 0) {
 async function loadLibs() {
   for (let idx in styleLibs) {
     let cssLibUrl = styleLibs[idx];
-    console.log(cssLibUrl);
     await loadStyle(cssLibUrl, idx);
   }
   for (let idx in jsLibs) {
@@ -203,9 +202,25 @@ let containerHtmlTemplate = `
       <b>{CURR_MEMBER_COUNT}</b> have already signed up. We need {REM_MEMBER_COUNT} more
     </div>
     <div style="display:{DISP_HAS_JOINED_POOL}">
-      You're in! We need <b>{REM_MEMBER_COUNT}</b> more
+      <div style="display:{DISP_IS_DONE}">
+        <b>Deal unlocked!</b> Enter your email for the 30% coupon.
+        <br />
+        <input
+          type="email"
+          style="
+            outline: 2px dashed #666666;
+            background-color: #dedede;
+            height: 18px;
+            margin-right: 8px;
+          "
+        />
+        <button>Submit</button>
+      </div>
+      <div style="display:{DISP_IS_NOT_DONE}">
+        You're in! We need <b>{REM_MEMBER_COUNT}</b> more
+      </div>
     </div>
-    <div>
+    <div style="display:{DISP_IS_NOT_DONE}">
       <span style="color: blue; cursor: pointer; display:{DISP_HAS_NOT_JOINED_POOL}" onclick="enterPool()">Click here</span> to join
       <br />
       <span style="cursor: pointer;  display:{DISP_HAS_JOINED_POOL}" onclick="exitPool()">Leave the pool</span>
@@ -248,6 +263,8 @@ async function render() {
   let DISP_SHOW_REFRESH = getDispProp(showRefresh);
   let DISP_HAS_JOINED_POOL = getDispProp(stats.pool.HAS_JOINED_POOL);
   let DISP_HAS_NOT_JOINED_POOL = getDispProp(!stats.pool.HAS_JOINED_POOL);
+  let DISP_IS_DONE = getDispProp(stats.pool.IS_DONE);
+  let DISP_IS_NOT_DONE = getDispProp(!stats.pool.IS_DONE);
   let MAIN_URL = BASE_PATH;
 
   let containerHtmlContent = containerHtmlTemplate
@@ -259,6 +276,8 @@ async function render() {
     .replace(/{DISP_SHOW_REFRESH}/g, DISP_SHOW_REFRESH)
     .replace(/{DISP_HAS_JOINED_POOL}/g, DISP_HAS_JOINED_POOL)
     .replace(/{DISP_HAS_NOT_JOINED_POOL}/g, DISP_HAS_NOT_JOINED_POOL)
+    .replace(/{DISP_IS_DONE}/g, DISP_IS_DONE)
+    .replace(/{DISP_IS_NOT_DONE}/g, DISP_IS_NOT_DONE)
     .replace(/{MAIN_URL}/g, MAIN_URL);
 
   let div = document.createElement("div");
@@ -313,6 +332,7 @@ let stats = {
     TARGET_COUNT: 20,
     CURR_MEMBER_COUNT: 16,
     HAS_JOINED_POOL: false,
+    IS_DONE: false,
   },
 };
 
