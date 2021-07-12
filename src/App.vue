@@ -10,12 +10,19 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue';
+import Navbar from "@/components/Navbar.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Navbar
   }
-}
+};
 </script>
+
+<style>
+html,
+body {
+  font-family: "Lato" !important;
+}
+</style>

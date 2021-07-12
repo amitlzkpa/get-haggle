@@ -114,7 +114,7 @@ let devMode = window.location.origin.toLowerCase().includes("localhost");
 let BASE_PATH = devMode ? "" : "https://get-haggle.herokuapp.com";
 
 let containerCss = `
-  font-family: 'Roboto';
+  font-family: 'Lato';
   bottom: 20px;
   left: 20px;
   width: 420px;

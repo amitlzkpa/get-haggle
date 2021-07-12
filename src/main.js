@@ -21,7 +21,18 @@ async function main() {
   Vue.prototype.env = env;
 
   Vue.use(Vuetify);
-  let vuetify = new Vuetify({});
+  let vuetify = new Vuetify({
+    theme: {
+      themes: {
+        light: {
+          primary: "#eb5600",
+          secondary: "#666666",
+          accent: "#8c9eff",
+          error: "#b71c1c",
+        },
+      },
+    },
+  });
 
   Vue.use(Auth0Plugin, {
     domain: env.AUTH0_DOMAIN,
