@@ -195,11 +195,6 @@ async function render() {
   let DISP_HAS_JOINED_POOL = getDispProp(hasJoinedPool);
   let DISP_HAS_NOT_JOINED_POOL = getDispProp(!hasJoinedPool);
 
-  console.log(`DISP_IS_REFRESHING: ${DISP_IS_REFRESHING}`);
-  console.log(`DISP_IS_NOT_REFRESHING: ${DISP_IS_NOT_REFRESHING}`);
-  console.log(`DISP_HAS_JOINED_POOL: ${DISP_HAS_JOINED_POOL}`);
-  console.log(`DISP_HAS_NOT_JOINED_POOL: ${DISP_HAS_NOT_JOINED_POOL}`);
-
   let containerHtmlContent = containerHtmlTemplate
     .replace(/{NEXT_MEMBER_COUNT}/g, NEXT_MEMBER_COUNT)
     .replace(/{NEXT_MEMBER_COUNT_ORDINAL}/g, NEXT_MEMBER_COUNT_ORDINAL)
