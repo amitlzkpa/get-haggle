@@ -38,12 +38,6 @@ const addUserToReq = async function(req, res, next) {
   next();
 };
 
-// public routes
-router.use("/test", function(req, res) {
-  console.log("Test route");
-  return res.send("Test route");
-});
-
 // protected routes
 router.use("/users", [checkJwt, errHandler, addUserToReq], require("./user"));
 router.use(
@@ -51,5 +45,30 @@ router.use(
   [checkJwt, errHandler, addUserToReq],
   require("./project")
 );
+
+// PUBLIC
+
+// public routes
+router.use("/test", function(req, res) {
+  console.log("Test route");
+  return res.send("Test route");
+});
+
+// ROOMS
+
+let currRooms = {};
+
+// public routes for rooms
+router.post("/room-enter", function(req, res) {
+  let { roomUrl = "", cookie = "" } = req.body;
+  let pplArr = currRooms[roomUrl];
+  if (!pplArr) {
+    currRooms[roomUrl] = [];
+    pplArr = currRooms[roomUrl];
+  }
+  pplArr.push(cookie);
+  console.log(JSON.stringify(currRooms, null, 2));
+  return res.send(currRooms);
+});
 
 module.exports = router;
