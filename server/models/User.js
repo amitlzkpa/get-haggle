@@ -23,6 +23,12 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    squareToken: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
     permissions: {
       admin: {
         type: Boolean,

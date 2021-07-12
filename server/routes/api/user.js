@@ -1,6 +1,22 @@
+const axios = require("axios");
 const router = require("express").Router();
 
 const User = require("../../models/User");
+
+router.post("/connect-square", async (req, res) => {
+  let tokenURL = "https://connect.squareupsandbox.com/oauth2/token";
+  let postData = {
+    client_id: process.env.SQUARE_CLIENT_ID,
+    client_secret: process.env.SQUARE_CLIENT_SECRET,
+    code: req.body.authCode,
+    grant_type: "authorization_code",
+  };
+  let r = await axios.post(tokenURL, postData);
+  let u = req.dbUser;
+  u.squareToken = r.data;
+  u = await u.save();
+  return res.json(u);
+});
 
 router.get("/id/:id", async (req, res) => {
   let id = req.params.id;

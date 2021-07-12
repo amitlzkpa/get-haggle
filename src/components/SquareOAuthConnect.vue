@@ -32,11 +32,9 @@ export default {
     let postData = {
       authCode: this.$route.query.code
     };
-    console.log(postData);
     let res = await this.$api.post("/api/users/connect-square", postData);
-    // this.$auth.dbUser = res.data;
-    console.log(res.data);
-    // window.history.replaceState(null, null, window.location.pathname);
+    this.$auth.dbUser = res.data;
+    window.history.replaceState(null, null, window.location.pathname);
   }
 };
 </script>
