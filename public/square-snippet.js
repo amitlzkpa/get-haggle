@@ -163,7 +163,11 @@ let containerHtmlTemplate = `
       <br />
       <span style="cursor: pointer;  display:{DISP_HAS_JOINED_POOL}" onclick="exitPool()">Exit</span>
     </div>
-    <span style="color: #dedede; cursor: pointer">More info</span>
+    <a
+      href="{MAIN_URL}"
+      target="_blank"
+      style="color: #dedede; cursor: pointer"
+    >More info</a>
     <div style="display:{DISP_SHOW_REFRESH}">
       <span style="color: #dedede; cursor: pointer" onclick="refresh()">Refresh</span>
     </div>
@@ -199,6 +203,7 @@ async function render() {
   let DISP_SHOW_REFRESH = getDispProp(showRefresh);
   let DISP_HAS_JOINED_POOL = getDispProp(hasJoinedPool);
   let DISP_HAS_NOT_JOINED_POOL = getDispProp(!hasJoinedPool);
+  let MAIN_URL = BASE_PATH;
 
   let containerHtmlContent = containerHtmlTemplate
     .replace(/{NEXT_MEMBER_COUNT}/g, NEXT_MEMBER_COUNT)
@@ -208,7 +213,8 @@ async function render() {
     .replace(/{POOL_COMPLETED_PERCENTAGE}/g, POOL_COMPLETED_PERCENTAGE)
     .replace(/{DISP_SHOW_REFRESH}/g, DISP_SHOW_REFRESH)
     .replace(/{DISP_HAS_JOINED_POOL}/g, DISP_HAS_JOINED_POOL)
-    .replace(/{DISP_HAS_NOT_JOINED_POOL}/g, DISP_HAS_NOT_JOINED_POOL);
+    .replace(/{DISP_HAS_NOT_JOINED_POOL}/g, DISP_HAS_NOT_JOINED_POOL)
+    .replace(/{MAIN_URL}/g, MAIN_URL);
 
   let div = document.createElement("div");
   div.id = "square-snippet-container";
