@@ -237,7 +237,11 @@ let containerHtmlTemplate = `
 `;
 
 async function main() {
-  if (!window.location.pathname.toLowerCase().includes("product")) return;
+  if (
+    !window.location.pathname.toLowerCase().includes("product") &&
+    !window.location.origin.toLowerCase().includes("localhost")
+  )
+    return;
   await loadLibs();
   syncCookie();
 
