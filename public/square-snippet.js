@@ -182,18 +182,19 @@ async function main() {
 }
 
 async function onUserClick() {
-  let productPageUrl = `${window.location.origin}${window.location.pathname}`;
-  console.log(productPageUrl);
+  await enterPool();
+}
 
-  // let fullPath = `${BASE_PATH}/api/test`;
-  // let res;
-  // console.log(fullPath);
-  // res = await axios.get(fullPath);
-  // console.log(res.data);
-  // res = await axios.post(fullPath);
-  // console.log(res.data);
-
-  await onEnter();
+async function enterPool() {
+  console.log("enter pool");
+  let fullPath = `${BASE_PATH}/api/pool-enter`;
+  let postBody = {
+    cookie: haggleCookieVal,
+    storePath: `${window.location.origin}${window.location.pathname}`,
+  };
+  let res = await axios.post(fullPath, postBody);
+  console.log(res.data);
+  console.log("-------------------");
 }
 
 main();

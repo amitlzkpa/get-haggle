@@ -71,4 +71,19 @@ router.post("/room-enter", function(req, res) {
   return res.send(currRooms);
 });
 
+let currPools = {};
+
+// public routes for pools
+router.post("/pool-enter", function(req, res) {
+  let { poolUrl = "", cookie = "" } = req.body;
+  let pplArr = currPools[poolUrl];
+  if (!pplArr) {
+    currPools[poolUrl] = [];
+    pplArr = currPools[poolUrl];
+  }
+  if (!pplArr.includes(cookie)) pplArr.push(cookie);
+  console.log(JSON.stringify(currPools, null, 2));
+  return res.send(currPools);
+});
+
 module.exports = router;
