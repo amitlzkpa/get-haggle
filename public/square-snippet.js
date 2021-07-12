@@ -128,9 +128,9 @@ let containerHtmlTemplate = `
     </div>
   </div>
   <p>
-    <b>{POOL_MEMBER_COUNT}</b> have already signed up
+    <b>{TARGET_COUNT}</b> have already signed up
     <br />
-    Be the <b>{NEXT_POOL_MEMBER_REV_NUMBER}{NEXT_POOL_MEMBER_REV_NUMBER_ORDINAL}</b>
+    Be the <b>{NEXT_MEMBER_COUNT}{NEXT_MEMBER_COUNT_ORDINAL}</b>
     <br />
     <span style="color: blue; cursor: pointer" onclick="enterPool()">Click here</span> to join
     <br />
@@ -156,9 +156,12 @@ async function render() {
     d.remove();
   }
   let containerHtmlContent = containerHtmlTemplate
-    .replace(/{POOL_MEMBER_COUNT}/g, 20)
-    .replace(/{NEXT_POOL_MEMBER_REV_NUMBER}/g, 17)
-    .replace(/{NEXT_POOL_MEMBER_REV_NUMBER_ORDINAL}/g, "th");
+    .replace(/{TARGET_COUNT}/g, stats.pool.TARGET_COUNT)
+    .replace(/{NEXT_MEMBER_COUNT}/g, stats.pool.NEXT_MEMBER_COUNT)
+    .replace(
+      /{NEXT_MEMBER_COUNT_ORDINAL}/g,
+      stats.pool.NEXT_MEMBER_COUNT_ORDINAL
+    );
 
   let div = document.createElement("div");
   div.id = "square-snippet-container";
@@ -198,6 +201,25 @@ async function onExit() {
 // ------------------------------------
 // POOL FEATURES
 // ------------------------------------
+
+let stats = {
+  pool: {
+    TARGET_COUNT: 20,
+    NEXT_MEMBER_COUNT: 16,
+    NEXT_MEMBER_COUNT_ORDINAL: "th",
+  },
+};
+
+async function updateStats() {
+  let fullPath = `${BASE_PATH}/api/pool-stats`;
+  let postBody = {
+    cookie: haggleCookieVal,
+    storePath: `${window.location.origin}${window.location.pathname}`,
+  };
+  let res = await axios.post(fullPath, postBody);
+  console.log(res.data);
+  stats = res.data;
+}
 
 async function enterPool() {
   let fullPath = `${BASE_PATH}/api/pool-enter`;

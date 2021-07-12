@@ -91,7 +91,17 @@ router.post("/room-exit", function(req, res) {
 
 let currPools = {};
 
-// public routes for pools
+router.post("/pool-stats", function(req, res) {
+  let { storePath = "", cookie = "" } = req.body;
+  let cookieArr = currPools[storePath];
+  if (!cookieArr) {
+    currPools[storePath] = [];
+    cookieArr = currPools[storePath];
+  }
+  if (!cookieArr.includes(cookie)) cookieArr.push(cookie);
+  return res.send(cookieArr);
+});
+
 router.post("/pool-enter", function(req, res) {
   let { storePath = "", cookie = "" } = req.body;
   let cookieArr = currPools[storePath];
