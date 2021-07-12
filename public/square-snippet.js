@@ -66,8 +66,10 @@ function loadStyle(href, idx = 0) {
     let linkElId = `stylesheet_${idx}`;
     const s = document.createElement("link");
     s.setAttribute("id", linkElId);
+    s.setAttribute("rel", "stylesheet");
     s.setAttribute("type", "text/css");
     s.setAttribute("href", href);
+    s.setAttribute("media", "all");
     let r = false;
     s.onerror = function(err) {
       reject(err, s);
@@ -85,10 +87,11 @@ function loadStyle(href, idx = 0) {
 }
 
 async function loadLibs() {
-  // for (let idx in styleLibs) {
-  //   let cssLibUrl = styleLibs[idx];
-  //   await loadStyle(cssLibUrl, idx);
-  // }
+  for (let idx in styleLibs) {
+    let cssLibUrl = styleLibs[idx];
+    console.log(cssLibUrl);
+    await loadStyle(cssLibUrl, idx);
+  }
   for (let idx in jsLibs) {
     let jsLibUrl = jsLibs[idx];
     await loadScript(jsLibUrl, idx);
