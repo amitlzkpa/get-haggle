@@ -32,7 +32,7 @@ function getOrdinal(num) {
 
 let jsLibs = ["https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"];
 let styleLibs = [
-  "http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800",
+  "https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800",
 ];
 
 // ref: https://gist.github.com/james2doyle/28a59f8692cec6f334773007b31a1523
