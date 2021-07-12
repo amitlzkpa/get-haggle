@@ -160,7 +160,7 @@ let containerHtml = `
     <br />
     Be the <b>6th</b>
     <br />
-    <span style="color: blue; cursor: pointer" onclick="onUserClick()">Click here</span> to join
+    <span style="color: blue; cursor: pointer" onclick="enterPool()">Click here</span> to join
     <br />
     <span style="color: #c9c9c9; cursor: pointer">More info</span>
   </p>
@@ -179,10 +179,6 @@ async function main() {
   div.setAttribute("style", containerCss);
   await wait(0);
   document.body.appendChild(div);
-}
-
-async function onUserClick() {
-  await enterPool();
 }
 
 async function enterPool() {
