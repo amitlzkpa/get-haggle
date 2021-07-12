@@ -96,33 +96,6 @@ function syncCookie() {
 }
 
 // ------------------------------------
-// ROOM FEATURES
-// ------------------------------------
-
-async function onEnter() {
-  let fullPath = `${BASE_PATH}/api/room-enter`;
-  let postBody = {
-    cookie: haggleCookieVal,
-    storePath: `${window.location.origin}${window.location.pathname}`,
-  };
-  let res = await axios.post(fullPath, postBody);
-  console.log(res.data);
-  console.log("-------------------");
-}
-
-async function onExit() {
-  console.log("exit");
-  let fullPath = `${BASE_PATH}/api/room-exit`;
-  let postBody = {
-    cookie: haggleCookieVal,
-    storePath: `${window.location.origin}${window.location.pathname}`,
-  };
-  let res = await axios.post(fullPath, postBody);
-  console.log(res.data);
-  console.log("-------------------");
-}
-
-// ------------------------------------
 // APP
 // ------------------------------------
 
@@ -174,6 +147,10 @@ async function main() {
   // await onEnter();
   // window.addEventListener("beforeunload", onExit);
 
+  await render();
+}
+
+async function render() {
   let div = document.createElement("div");
   div.id = "container";
   div.innerHTML = containerHtml;
@@ -181,6 +158,37 @@ async function main() {
   await wait(0);
   document.body.appendChild(div);
 }
+
+// ------------------------------------
+// ROOM FEATURES
+// ------------------------------------
+
+async function onEnter() {
+  let fullPath = `${BASE_PATH}/api/room-enter`;
+  let postBody = {
+    cookie: haggleCookieVal,
+    storePath: `${window.location.origin}${window.location.pathname}`,
+  };
+  let res = await axios.post(fullPath, postBody);
+  console.log(res.data);
+  console.log("-------------------");
+}
+
+async function onExit() {
+  console.log("exit");
+  let fullPath = `${BASE_PATH}/api/room-exit`;
+  let postBody = {
+    cookie: haggleCookieVal,
+    storePath: `${window.location.origin}${window.location.pathname}`,
+  };
+  let res = await axios.post(fullPath, postBody);
+  console.log(res.data);
+  console.log("-------------------");
+}
+
+// ------------------------------------
+// POOL FEATURES
+// ------------------------------------
 
 async function enterPool() {
   let fullPath = `${BASE_PATH}/api/pool-enter`;
