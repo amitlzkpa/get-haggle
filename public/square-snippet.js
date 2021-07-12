@@ -148,11 +148,17 @@ let containerHtmlTemplate = `
     </div>
   </div>
   <p>
-  You'll be the <b>{NEXT_MEMBER_COUNT}{NEXT_MEMBER_COUNT_ORDINAL}</b>!
-    <br />
-    <b>{CURR_MEMBER_COUNT}</b> have already signed up. We need {REM_MEMBER_COUNT} more
-    <br />
-    <div style="display:{DISP_IS_REFRESHING}">
+    <div style="display:{DISP_HAS_NOT_JOINED_POOL}">
+      You'll be the <b>{NEXT_MEMBER_COUNT}{NEXT_MEMBER_COUNT_ORDINAL}</b>!
+      <br />
+      <b>{CURR_MEMBER_COUNT}</b> have already signed up. We need {REM_MEMBER_COUNT} more
+    </div>
+    <div style="display:{DISP_HAS_JOINED_POOL}">
+      You're in!
+      <br />
+      We need <b>{REM_MEMBER_COUNT}</b> more
+    </div>
+    <div style="display:{DISP_SHOW_REFRESH}">
       <span style="color: blue; cursor: pointer" onclick="refresh()">Refresh</span>
     </div>
     <div>
@@ -188,9 +194,9 @@ async function render() {
   let CURR_MEMBER_COUNT = stats.pool.CURR_MEMBER_COUNT;
   let REM_MEMBER_COUNT = TARGET_COUNT - CURR_MEMBER_COUNT;
   let POOL_COMPLETED_PERCENTAGE = (CURR_MEMBER_COUNT * 100) / TARGET_COUNT;
-  let isRefreshing = false;
-  let hasJoinedPool = true;
-  let DISP_IS_REFRESHING = getDispProp(isRefreshing);
+  let showRefresh = true;
+  let hasJoinedPool = false;
+  let DISP_SHOW_REFRESH = getDispProp(showRefresh);
   let DISP_HAS_JOINED_POOL = getDispProp(hasJoinedPool);
   let DISP_HAS_NOT_JOINED_POOL = getDispProp(!hasJoinedPool);
 
@@ -200,7 +206,7 @@ async function render() {
     .replace(/{CURR_MEMBER_COUNT}/g, CURR_MEMBER_COUNT)
     .replace(/{REM_MEMBER_COUNT}/g, REM_MEMBER_COUNT)
     .replace(/{POOL_COMPLETED_PERCENTAGE}/g, POOL_COMPLETED_PERCENTAGE)
-    .replace(/{DISP_IS_REFRESHING}/g, DISP_IS_REFRESHING)
+    .replace(/{DISP_SHOW_REFRESH}/g, DISP_SHOW_REFRESH)
     .replace(/{DISP_HAS_JOINED_POOL}/g, DISP_HAS_JOINED_POOL)
     .replace(/{DISP_HAS_NOT_JOINED_POOL}/g, DISP_HAS_NOT_JOINED_POOL);
 
