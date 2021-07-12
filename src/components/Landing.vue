@@ -2,13 +2,13 @@
   <div>
     <v-row>
       <v-col>
-        <h1 style="font-size: 72px" class="font-weight-light">Haggle</h1>
+        <p style="font-size: 96px; font-weight: 100">Haggle</p>
         <p>Get together and get discounts</p>
       </v-col>
     </v-row>
 
     <v-row>
-      <v-col> </v-col>
+      <v-col />
     </v-row>
   </div>
 </template>
