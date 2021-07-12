@@ -24,7 +24,11 @@
 export default {
   computed: {
     hasSquareLinked() {
-      return false;
+      return (
+        !!this.$auth.dbUser &&
+        !!this.$auth.dbUser.squareToken &&
+        JSON.stringify(this.$auth.dbUser.squareToken, null, 2) !== "{}"
+      );
     }
   },
   async mounted() {
