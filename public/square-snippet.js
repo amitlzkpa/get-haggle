@@ -118,7 +118,7 @@ let containerCss = `
   padding: 18px;
 `;
 
-let containerHtml = `
+let containerHtmlTemplate = `
   Hi there!
   <p style="font-size: 24px; margin-bottom: 8px">
     Work towards <b>30% discount</b>
@@ -128,9 +128,9 @@ let containerHtml = `
     </div>
   </div>
   <p>
-    <b>14</b> have already signed up
+    <b>{POOL_MEMBER_COUNT}</b> have already signed up
     <br />
-    Be the <b>6th</b>
+    Be the <b>{NEXT_POOL_MEMBER_REV_NUMBER}{NEXT_POOL_MEMBER_REV_NUMBER_ORDINAL}</b>
     <br />
     <span style="color: blue; cursor: pointer" onclick="enterPool()">Click here</span> to join
     <br />
@@ -155,9 +155,14 @@ async function render() {
   if (d) {
     d.remove();
   }
+  let containerHtmlContent = containerHtmlTemplate
+    .replace(/{POOL_MEMBER_COUNT}/g, 20)
+    .replace(/{NEXT_POOL_MEMBER_REV_NUMBER}/g, 17)
+    .replace(/{NEXT_POOL_MEMBER_REV_NUMBER_ORDINAL}/g, "th");
+
   let div = document.createElement("div");
   div.id = "square-snippet-container";
-  div.innerHTML = containerHtml;
+  div.innerHTML = containerHtmlContent;
   div.setAttribute("style", containerCss);
   await wait(0);
   document.body.appendChild(div);
