@@ -135,7 +135,7 @@ let containerCss = `
   font-family: 'Roboto';
   bottom: 20px;
   left: 20px;
-  width: 400px;
+  width: 420px;
   height: 200px;
   background-color: white;
   font-size: 18px;
@@ -149,12 +149,20 @@ let containerCss = `
 let containerHtml = `
   Hi there!
   <p style="font-size: 24px; margin-bottom: 8px">
-    The seller offers <b>30% discount</b> if <b>more than 20 people</b> purchase before <b>24th May</b>.
+    Work towards <b>30% discount</b>
   </p>
+  <div>
+    <div style="height:6px; width:300px; background-color: green; border-radius:2px; margin-bottom: 10px;">
+    </div>
+  </div>
   <p>
-    <b>14</b> have already signed up.
+    <b>14</b> have already signed up
     <br />
-    <span style="color: blue; cursor: pointer" onclick="onUserClick()">Click here</span> to join them.
+    Be the <b>6th</b>
+    <br />
+    <span style="color: blue; cursor: pointer" onclick="onUserClick()">Click here</span> to join
+    <br />
+    <span style="color: #c9c9c9; cursor: pointer">More info</span>
   </p>
 `;
 
