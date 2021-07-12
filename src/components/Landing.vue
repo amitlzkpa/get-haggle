@@ -46,22 +46,7 @@
             </div>
           </div>
           <div class="background">
-            <div style="position: relative">
-              <div style="object-fit: cover; width: 100%; z-index: -9999"></div>
-              <div
-                style="
-                  object-fit: cover;
-                  width: 100%;
-                  height: 700px;
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  z-index: 10;
-                "
-              >
-                <AnimLines />
-              </div>
-            </div>
+            <div style="position: relative"></div>
           </div>
         </div>
       </v-col>
