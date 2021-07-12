@@ -191,7 +191,6 @@ async function render() {
   let isRefreshing = false;
   let hasJoinedPool = true;
   let DISP_IS_REFRESHING = getDispProp(isRefreshing);
-  let DISP_IS_NOT_REFRESHING = getDispProp(!isRefreshing);
   let DISP_HAS_JOINED_POOL = getDispProp(hasJoinedPool);
   let DISP_HAS_NOT_JOINED_POOL = getDispProp(!hasJoinedPool);
 
@@ -202,7 +201,6 @@ async function render() {
     .replace(/{REM_MEMBER_COUNT}/g, REM_MEMBER_COUNT)
     .replace(/{POOL_COMPLETED_PERCENTAGE}/g, POOL_COMPLETED_PERCENTAGE)
     .replace(/{DISP_IS_REFRESHING}/g, DISP_IS_REFRESHING)
-    .replace(/{DISP_IS_NOT_REFRESHING}/g, DISP_IS_NOT_REFRESHING)
     .replace(/{DISP_HAS_JOINED_POOL}/g, DISP_HAS_JOINED_POOL)
     .replace(/{DISP_HAS_NOT_JOINED_POOL}/g, DISP_HAS_NOT_JOINED_POOL);
 
@@ -265,6 +263,8 @@ async function updateStats() {
   };
   let res = await axios.post(fullPath, postBody);
   stats = res.data;
+  console.log("STATS UPDATED");
+  console.log(stats);
 }
 
 async function enterPool() {
@@ -274,6 +274,7 @@ async function enterPool() {
     storePath: `${window.location.origin}${window.location.pathname}`,
   };
   let res = await axios.post(fullPath, postBody);
+  console.log("ENTER-POOL");
   console.log(res.data);
   await refresh();
 }
@@ -285,6 +286,8 @@ async function exitPool() {
     storePath: `${window.location.origin}${window.location.pathname}`,
   };
   let res = await axios.post(fullPath, postBody);
+  console.log("EXIT-POOL");
+  console.log(res.data);
   await refresh();
 }
 
