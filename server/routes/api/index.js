@@ -98,8 +98,17 @@ router.post("/pool-stats", function(req, res) {
     currPools[storePath] = [];
     cookieArr = currPools[storePath];
   }
-  if (!cookieArr.includes(cookie)) cookieArr.push(cookie);
-  return res.send(cookieArr);
+
+  let TARGET_COUNT = 20;
+  let CURR_MEMBER_COUNT = cookieArr.length;
+
+  let stats = {
+    pool: {
+      TARGET_COUNT,
+      CURR_MEMBER_COUNT,
+    },
+  };
+  return res.send(stats);
 });
 
 router.post("/pool-enter", function(req, res) {

@@ -16,6 +16,16 @@ function uuidv4() {
   );
 }
 
+function getOrdinal(num) {
+  return num.toString().slice(-1) === "1"
+    ? "st"
+    : num.toString().slice(-1) === "2"
+    ? "nd"
+    : num.toString().slice(-1) === "3"
+    ? "rd"
+    : "th";
+}
+
 // ------------------------------------
 // EXT LIB FEATURES
 // ------------------------------------
@@ -124,13 +134,25 @@ let containerHtmlTemplate = `
     Work towards <b>30% discount</b>
   </p>
   <div>
-    <div style="height:6px; width:300px; background-color: green; border-radius:2px; margin-bottom: 10px;">
+    <div style="width: 100%">
+      <div
+        style="
+          height: 6px;
+          width: {POOL_COMPLETED_PERCENTAGE}%;
+          background-color: green;
+          border-radius: 2px;
+          margin-bottom: 10px;
+        "
+      >
+      </div>
     </div>
   </div>
   <p>
-    <b>{TARGET_COUNT}</b> have already signed up
+  You'll be the <b>{NEXT_MEMBER_COUNT}{NEXT_MEMBER_COUNT_ORDINAL}</b>!
     <br />
-    Be the <b>{NEXT_MEMBER_COUNT}{NEXT_MEMBER_COUNT_ORDINAL}</b>
+    <b>{CURR_MEMBER_COUNT}</b> have already signed up. We need {REM_MEMBER_COUNT} more
+    <br />
+    <span style="color: blue; cursor: pointer" onclick="refresh()">Refresh</span>
     <br />
     <span style="color: blue; cursor: pointer" onclick="enterPool()">Click here</span> to join
     <br />
@@ -147,7 +169,7 @@ async function main() {
   // await onEnter();
   // window.addEventListener("beforeunload", onExit);
 
-  await render();
+  await refresh();
 }
 
 async function render() {
@@ -155,13 +177,20 @@ async function render() {
   if (d) {
     d.remove();
   }
+
+  let TARGET_COUNT = stats.pool.TARGET_COUNT;
+  let NEXT_MEMBER_COUNT = stats.pool.CURR_MEMBER_COUNT + 1;
+  let NEXT_MEMBER_COUNT_ORDINAL = getOrdinal(stats.pool.CURR_MEMBER_COUNT + 1);
+  let CURR_MEMBER_COUNT = stats.pool.CURR_MEMBER_COUNT;
+  let REM_MEMBER_COUNT = TARGET_COUNT - CURR_MEMBER_COUNT;
+  let POOL_COMPLETED_PERCENTAGE = (CURR_MEMBER_COUNT * 100) / TARGET_COUNT;
+
   let containerHtmlContent = containerHtmlTemplate
-    .replace(/{TARGET_COUNT}/g, stats.pool.TARGET_COUNT)
-    .replace(/{NEXT_MEMBER_COUNT}/g, stats.pool.NEXT_MEMBER_COUNT)
-    .replace(
-      /{NEXT_MEMBER_COUNT_ORDINAL}/g,
-      stats.pool.NEXT_MEMBER_COUNT_ORDINAL
-    );
+    .replace(/{NEXT_MEMBER_COUNT}/g, NEXT_MEMBER_COUNT)
+    .replace(/{NEXT_MEMBER_COUNT_ORDINAL}/g, NEXT_MEMBER_COUNT_ORDINAL)
+    .replace(/{CURR_MEMBER_COUNT}/g, CURR_MEMBER_COUNT)
+    .replace(/{REM_MEMBER_COUNT}/g, REM_MEMBER_COUNT)
+    .replace(/{POOL_COMPLETED_PERCENTAGE}/g, POOL_COMPLETED_PERCENTAGE);
 
   let div = document.createElement("div");
   div.id = "square-snippet-container";
@@ -169,6 +198,11 @@ async function render() {
   div.setAttribute("style", containerCss);
   await wait(0);
   document.body.appendChild(div);
+}
+
+async function refresh() {
+  await updateStats();
+  await render();
 }
 
 // ------------------------------------
@@ -205,8 +239,7 @@ async function onExit() {
 let stats = {
   pool: {
     TARGET_COUNT: 20,
-    NEXT_MEMBER_COUNT: 16,
-    NEXT_MEMBER_COUNT_ORDINAL: "th",
+    CURR_MEMBER_COUNT: 16,
   },
 };
 
@@ -217,7 +250,6 @@ async function updateStats() {
     storePath: `${window.location.origin}${window.location.pathname}`,
   };
   let res = await axios.post(fullPath, postBody);
-  console.log(res.data);
   stats = res.data;
 }
 
@@ -229,7 +261,7 @@ async function enterPool() {
   };
   let res = await axios.post(fullPath, postBody);
   console.log(res.data);
-  await render();
+  await refresh();
 }
 
 async function exitPool() {
@@ -239,8 +271,7 @@ async function exitPool() {
     storePath: `${window.location.origin}${window.location.pathname}`,
   };
   let res = await axios.post(fullPath, postBody);
-  console.log(res.data);
-  await render();
+  await refresh();
 }
 
 main();
