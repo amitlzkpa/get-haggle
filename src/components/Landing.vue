@@ -4,6 +4,7 @@
       <v-col>
         <p style="font-size: 96px; font-weight: 100">Haggle</p>
         <p>Get together and get discounts</p>
+        <AnimLines />
       </v-col>
     </v-row>
 
@@ -14,7 +15,12 @@
 </template>
 
 <script>
+import AnimLines from "@/components/AnimLines.vue";
+
 export default {
+  components: {
+    AnimLines
+  },
   data() {
     return {
       publicRouteMsg: null,
