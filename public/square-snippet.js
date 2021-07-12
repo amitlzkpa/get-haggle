@@ -180,16 +180,25 @@ async function render() {
     d.remove();
   }
 
+  let getDispProp = (bool) => (bool ? "content" : "none");
+
   let TARGET_COUNT = stats.pool.TARGET_COUNT;
   let NEXT_MEMBER_COUNT = stats.pool.CURR_MEMBER_COUNT + 1;
   let NEXT_MEMBER_COUNT_ORDINAL = getOrdinal(stats.pool.CURR_MEMBER_COUNT + 1);
   let CURR_MEMBER_COUNT = stats.pool.CURR_MEMBER_COUNT;
   let REM_MEMBER_COUNT = TARGET_COUNT - CURR_MEMBER_COUNT;
   let POOL_COMPLETED_PERCENTAGE = (CURR_MEMBER_COUNT * 100) / TARGET_COUNT;
-  let DISP_IS_REFRESHING = "none";
-  let DISP_IS_NOT_REFRESHING = "contents";
-  let DISP_HAS_JOINED_POOL = "none";
-  let DISP_HAS_NOT_JOINED_POOL = "content";
+  let isRefreshing = false;
+  let hasJoinedPool = true;
+  let DISP_IS_REFRESHING = getDispProp(isRefreshing);
+  let DISP_IS_NOT_REFRESHING = getDispProp(!isRefreshing);
+  let DISP_HAS_JOINED_POOL = getDispProp(hasJoinedPool);
+  let DISP_HAS_NOT_JOINED_POOL = getDispProp(!hasJoinedPool);
+
+  console.log(`DISP_IS_REFRESHING: ${DISP_IS_REFRESHING}`);
+  console.log(`DISP_IS_NOT_REFRESHING: ${DISP_IS_NOT_REFRESHING}`);
+  console.log(`DISP_HAS_JOINED_POOL: ${DISP_HAS_JOINED_POOL}`);
+  console.log(`DISP_HAS_NOT_JOINED_POOL: ${DISP_HAS_NOT_JOINED_POOL}`);
 
   let containerHtmlContent = containerHtmlTemplate
     .replace(/{NEXT_MEMBER_COUNT}/g, NEXT_MEMBER_COUNT)
