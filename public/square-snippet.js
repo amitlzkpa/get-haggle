@@ -154,9 +154,7 @@ let containerHtmlTemplate = `
       <b>{CURR_MEMBER_COUNT}</b> have already signed up. We need {REM_MEMBER_COUNT} more
     </div>
     <div style="display:{DISP_HAS_JOINED_POOL}">
-      You're in!
-      <br />
-      We need <b>{REM_MEMBER_COUNT}</b> more
+      You're in! We need <b>{REM_MEMBER_COUNT}</b> more
     </div>
     <div>
       <span style="color: blue; cursor: pointer; display:{DISP_HAS_NOT_JOINED_POOL}" onclick="enterPool()">Click here</span> to join
