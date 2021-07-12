@@ -186,11 +186,10 @@ async function onUserClick() {
   console.log(productPageUrl);
 
   let fullPath = `${BASE_PATH}/api/test`;
+  let res;
   console.log(fullPath);
-  // let res;
-  // console.log(fullPath);
-  // res = await axios.get(fullPath);
-  // console.log(res.data);
+  res = await axios.get(fullPath);
+  console.log(res.data);
   // res = await axios.post(fullPath);
   // console.log(res.data);
 }
