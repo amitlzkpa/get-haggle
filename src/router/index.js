@@ -47,6 +47,12 @@ const routes = [
   },
 
   {
+    path: "/oauth-redirect",
+    name: "Square OAuth Redirect",
+    component: () => import("@/components/SquareOAuthConnect.vue"),
+  },
+
+  {
     path: "/profile/view/:id",
     name: "view-profile",
     component: ProfileView,
