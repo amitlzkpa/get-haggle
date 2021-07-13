@@ -27,6 +27,9 @@
             <v-list-item :to="`/profile/edit/${$auth.dbUser._id}`">
               {{ $auth.dbUser.name }}
             </v-list-item>
+            <v-list-item to="/my-stores">
+              <v-list-item-title> My Stores </v-list-item-title>
+            </v-list-item>
             <v-list-item to="/dashboard">
               <v-list-item-title> Dashboard </v-list-item-title>
             </v-list-item>

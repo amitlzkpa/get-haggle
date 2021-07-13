@@ -41,6 +41,11 @@ const addUserToReq = async function(req, res, next) {
 // protected routes
 router.use("/users", [checkJwt, errHandler, addUserToReq], require("./user"));
 router.use(
+  "/square",
+  [checkJwt, errHandler, addUserToReq],
+  require("./square")
+);
+router.use(
   "/projects",
   [checkJwt, errHandler, addUserToReq],
   require("./project")
