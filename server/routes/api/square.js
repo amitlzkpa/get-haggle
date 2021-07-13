@@ -50,6 +50,22 @@ router.post("/add-snippet-to-store", async function(req, res) {
   return res.json(resp.data);
 });
 
+router.post("/retrieve-snippet-for-store", async function(req, res) {
+  let siteId = req.body.siteId;
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
+    "Square-Version": "2021-06-16",
+  };
+  let apiEndPt = `https://connect.squareup.com/v2/sites/${siteId}/snippet`;
+  try {
+    let resp = await axios.get(apiEndPt, { headers });
+    return res.json(resp.data);
+  } catch {
+    return res.json({});
+  }
+});
+
 router.post("/remove-snippet-from-store", async function(req, res) {
   let siteId = req.body.siteId;
   const headers = {

@@ -31,16 +31,14 @@
                 <div class="pt-6">
                   <v-icon
                     large
-                    :color="store.isLinkedToHaggle ? 'grey' : '#eb5600'"
+                    :color="store.linkedSnippet ? 'grey' : '#eb5600'"
                   >
-                    {{
-                      store.isLinkedToHaggle ? "mdi-check" : "mdi-plus-thick"
-                    }}
+                    {{ store.linkedSnippet ? "mdi-check" : "mdi-plus-thick" }}
                   </v-icon>
                   <v-icon
                     @click="addSnippetToStore(store)"
                     large
-                    :color="store.isLinkedToHaggle ? 'grey' : '#eb5600'"
+                    :color="store.linkedSnippet ? 'grey' : '#eb5600'"
                   >
                     mdi-account-group
                   </v-icon>
@@ -63,7 +61,7 @@ let storesSample = [
     is_published: true,
     created_at: "2021-07-13T02:25:22.000000Z",
     updated_at: "2021-07-13T02:26:47.000000Z",
-    isLinkedToHaggle: false
+    linkedSnippet: false
   },
   {
     id: "site_829240995758856365",
@@ -72,19 +70,32 @@ let storesSample = [
     is_published: true,
     created_at: "2021-07-09T01:48:17.000000Z",
     updated_at: "2021-07-13T02:31:06.000000Z",
-    isLinkedToHaggle: true
+    linkedSnippet: true
   }
 ];
 
 export default {
   data() {
     return {
-      stores: storesSample
+      // stores: storesSample
+      allStores: []
     };
   },
+  computed: {
+    stores() {
+      return this.allStores;
+    }
+  },
   async mounted() {
-    let res = await this.$api.post(`/api/square/get-my-stores`);
-    this.stores = res.data.sites;
+    let res;
+    res = await this.$api.post(`/api/square/get-my-stores`);
+    this.allStores = res.data.sites;
+    for (let st of this.allStores) {
+      res = await this.$api.post(`/api/square/retrieve-snippet-for-store`, {
+        siteId: st.id
+      });
+      st.linkedSnippet = res.data.snippet;
+    }
   },
   methods: {
     async addSnippetToStore(store) {
@@ -95,8 +106,7 @@ export default {
         `/api/square/add-snippet-to-store`,
         postData
       );
-      console.log(res.data);
-      store.isLinkedToHaggle = true;
+      store.linkedSnippet = res.data.snippet;
     }
   }
 };
