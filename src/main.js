@@ -6,6 +6,9 @@ import router from "@/router";
 import store from "@/store";
 import api from "@/api";
 
+import moment from "moment";
+
+Vue.prototype.moment = moment;
 Vue.prototype.$api = api;
 Vue.prototype.env = {};
 
