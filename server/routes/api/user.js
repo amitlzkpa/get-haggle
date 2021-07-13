@@ -4,7 +4,7 @@ const router = require("express").Router();
 const User = require("../../models/User");
 
 router.post("/connect-square", async (req, res) => {
-  let tokenURL = "https://connect.squareupsandbox.com/oauth2/token";
+  let tokenURL = "https://connect.squareup.com/oauth2/token";
   let postData = {
     client_id: process.env.SQUARE_CLIENT_ID,
     client_secret: process.env.SQUARE_CLIENT_SECRET,

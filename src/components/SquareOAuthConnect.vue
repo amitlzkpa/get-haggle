@@ -2,7 +2,7 @@
   <div class="d-flex py-4">
     <a
       v-if="!hasSquareLinked"
-      :href="`https://connect.squareupsandbox.com/oauth2/authorize?client_id=${env.SQUARE_CLIENT_ID}&scope=MERCHANT_PROFILE_READ+ONLINE_STORE_SITE_READ+ITEMS_READ+ITEMS_WRITE+ITEMS_WRITE+INVENTORY_READ+INVENTORY_WRITE+ONLINE_STORE_SNIPPETS_READ+ONLINE_STORE_SNIPPETS_WRITE`"
+      :href="`https://connect.squareup.com/oauth2/authorize?client_id=${env.SQUARE_CLIENT_ID}&scope=MERCHANT_PROFILE_READ+ONLINE_STORE_SITE_READ+ITEMS_READ+ITEMS_WRITE+ITEMS_WRITE+INVENTORY_READ+INVENTORY_WRITE+ONLINE_STORE_SNIPPETS_READ+ONLINE_STORE_SNIPPETS_WRITE`"
       target="_blank"
     >
       <v-img height="60" width="240" class="ma-2" src="/imgs/square-logo.svg" />

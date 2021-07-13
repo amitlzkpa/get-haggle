@@ -14,7 +14,6 @@ router.post("/get-store-details", async function(req, res) {
 
 router.post("/get-my-stores", async function(req, res) {
   let client = new Client({
-    environment: Environment.Sandbox,
     accessToken: req.dbUser.squareToken.access_token,
   });
   let stores = await client.sitesApi.listSites();
