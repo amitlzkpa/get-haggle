@@ -7,6 +7,7 @@ import ProfileView from "@/views/ProfileView.vue";
 import ProfileEdit from "@/views/ProfileEdit.vue";
 import Dashboard from "@/views/Dashboard.vue";
 import MyStores from "@/views/MyStores.vue";
+import MyStore from "@/views/MyStore.vue";
 import ProjectView from "@/views/ProjectView.vue";
 import ProjectEdit from "@/views/ProjectEdit.vue";
 
@@ -46,6 +47,15 @@ const routes = [
     component: MyStores,
     meta: {
       title: (route) => "App: My Stores",
+      guards: [guards.authGuard],
+    },
+  },
+  {
+    path: "/my-store/:site_id",
+    name: "my-store",
+    component: MyStore,
+    meta: {
+      title: (route) => "App: My Store",
       guards: [guards.authGuard],
     },
   },

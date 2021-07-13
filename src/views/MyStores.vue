@@ -3,13 +3,8 @@
     <v-container fluid>
       <v-row>
         <v-col>
-          <div
-            v-for="store of stores"
-            :key="store.id"
-            class="my-1"
-            :href="`/my-store/${store.id}`"
-          >
-            <v-card outlined tile class="pa-8">
+          <div v-for="store of stores" :key="store.id" class="my-1">
+            <v-card outlined tile class="pa-8" :href="`/my-store/${store.id}`">
               <div class="d-flex">
                 <div class="flex-grow-1">
                   <span class="display-1 font-weight-light">{{
