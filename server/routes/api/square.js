@@ -2,6 +2,21 @@ const axios = require("axios");
 const router = require("express").Router();
 const { Client, Environment } = require("square");
 
+router.post("/connect", async (req, res) => {
+  let tokenURL = "https://connect.squareup.com/oauth2/token";
+  let postData = {
+    client_id: process.env.SQUARE_CLIENT_ID,
+    client_secret: process.env.SQUARE_CLIENT_SECRET,
+    code: req.body.authCode,
+    grant_type: "authorization_code",
+  };
+  let r = await axios.post(tokenURL, postData);
+  let u = req.dbUser;
+  u.squareToken = r.data;
+  u = await u.save();
+  return res.json(u);
+});
+
 router.post("/get-store-details", async function(req, res) {
   const headers = {
     "Content-Type": "application/json",

@@ -36,7 +36,7 @@ export default {
     let postData = {
       authCode: this.$route.query.code
     };
-    let res = await this.$api.post("/api/users/connect-square", postData);
+    let res = await this.$api.post("/api/square/connect", postData);
     this.$auth.dbUser = res.data;
     window.history.replaceState(null, null, window.location.pathname);
   }
