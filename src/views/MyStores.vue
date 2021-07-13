@@ -4,12 +4,17 @@
       <v-row>
         <v-col>
           <div v-for="store of stores" :key="store.id" class="my-1">
-            <v-card outlined tile class="pa-8" :href="`/my-store/${store.id}`">
+            <v-card outlined tile class="pa-8">
               <div class="d-flex">
                 <div class="flex-grow-1">
-                  <span class="display-1 font-weight-light">{{
-                    store.site_title
-                  }}</span>
+                  <span class="display-1 font-weight-light">
+                    <a
+                      :href="`/my-store/${store.id}`"
+                      class="text-decoration-none"
+                    >
+                      {{ store.site_title }}
+                    </a>
+                  </span>
                   <br />
                   <a
                     target="_blank"
@@ -23,7 +28,7 @@
                     >Created {{ moment(store.created_at).fromNow() }}</span
                   >
                 </div>
-                <div class="pt-6" style="cursor: pointer">
+                <div class="pt-6">
                   <v-icon
                     large
                     :color="store.isLinkedToHaggle ? 'grey' : '#eb5600'"
@@ -33,7 +38,7 @@
                     }}
                   </v-icon>
                   <v-icon
-                    to="!#"
+                    @click="addSnippetToStore(store)"
                     large
                     :color="store.isLinkedToHaggle ? 'grey' : '#eb5600'"
                   >
@@ -78,8 +83,21 @@ export default {
     };
   },
   async mounted() {
-    // let res = await this.$api.post(`/api/square/get-my-stores`);
-    // console.log(res.data);
+    let res = await this.$api.post(`/api/square/get-my-stores`);
+    this.stores = res.data.sites;
+  },
+  methods: {
+    async addSnippetToStore(store) {
+      let postData = {
+        siteId: store.id
+      };
+      let res = await this.$api.post(
+        `/api/square/add-snippet-to-store`,
+        postData
+      );
+      console.log(res.data);
+      store.isLinkedToHaggle = true;
+    }
   }
 };
 </script>

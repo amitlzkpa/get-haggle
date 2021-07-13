@@ -1,6 +1,6 @@
 const axios = require("axios");
 const router = require("express").Router();
-const { Client, Environment } = require("square");
+const { Client } = require("square");
 
 router.post("/connect", async (req, res) => {
   let tokenURL = "https://connect.squareup.com/oauth2/token";
@@ -18,21 +18,48 @@ router.post("/connect", async (req, res) => {
 });
 
 router.post("/get-store-details", async function(req, res) {
+  return res.json({ foo: "bar" });
+});
+
+router.post("/get-my-stores", async function(req, res) {
   const headers = {
     "Content-Type": "application/json",
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
+    "Square-Version": "2021-06-16",
   };
   let apiEndPt = "https://connect.squareup.com/v2/sites";
   let resp = await axios.get(apiEndPt, { headers });
   return res.json(resp.data);
 });
 
-router.post("/get-my-stores", async function(req, res) {
-  let client = new Client({
-    accessToken: req.dbUser.squareToken.access_token,
-  });
-  let stores = await client.sitesApi.listSites();
-  return res.json(stores);
+router.post("/add-snippet-to-store", async function(req, res) {
+  let siteId = req.body.siteId;
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
+    "Square-Version": "2021-06-16",
+  };
+  let postBody = {
+    snippet: {
+      content:
+        '<script src="https://get-haggle.herokuapp.com/square-snippet.js"></script>',
+    },
+  };
+  let apiEndPt = `https://connect.squareup.com/v2/sites/${siteId}/snippet`;
+  let resp = await axios.post(apiEndPt, postBody, { headers });
+  return res.json(resp.data);
+});
+
+router.post("/remove-snippet-from-store", async function(req, res) {
+  let siteId = req.body.siteId;
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
+    "Square-Version": "2021-06-16",
+  };
+  let apiEndPt = `https://connect.squareup.com/v2/sites/${siteId}/snippet`;
+  let resp = await axios.delete(apiEndPt, { headers });
+  return res.json(resp.data);
 });
 
 router.use("/test", function(req, res) {
