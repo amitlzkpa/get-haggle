@@ -65,9 +65,11 @@ export default {
     };
   },
   async mounted() {
-    console.log(this.$route.params.site_id);
-    // let res = await this.$api.post(`/api/square/get-my-stores`);
-    // console.log(res.data);
+    let postBody = {
+      storeId: this.$route.params.site_id
+    };
+    let res = await this.$api.post(`/api/square/get-store-details`, postBody);
+    console.log(res.data);
   }
 };
 </script>
