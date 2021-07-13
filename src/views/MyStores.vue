@@ -29,19 +29,24 @@
                   >
                 </div>
                 <div class="pt-6">
-                  <v-icon
+                  <v-btn
+                    @click="
+                      store.linkedSnippet
+                        ? removeSnippetFromStore(store)
+                        : addSnippetToStore(store)
+                    "
+                    text
                     large
+                    class="pa-4"
                     :color="store.linkedSnippet ? 'grey' : '#eb5600'"
                   >
-                    {{ store.linkedSnippet ? "mdi-check" : "mdi-plus-thick" }}
-                  </v-icon>
-                  <v-icon
-                    @click="addSnippetToStore(store)"
-                    large
-                    :color="store.linkedSnippet ? 'grey' : '#eb5600'"
-                  >
-                    mdi-account-group
-                  </v-icon>
+                    <v-icon large plain>
+                      {{ store.linkedSnippet ? "mdi-check" : "mdi-plus-thick" }}
+                    </v-icon>
+                    <v-icon class="mx-4" plain large>
+                      mdi-account-group
+                    </v-icon>
+                  </v-btn>
                 </div>
               </div>
             </v-card>
@@ -100,6 +105,16 @@ export default {
       };
       let res = await this.$api.post(
         `/api/square/add-snippet-to-store`,
+        postData
+      );
+      store.linkedSnippet = res.data.snippet;
+    },
+    async removeSnippetFromStore(store) {
+      let postData = {
+        siteId: store.id
+      };
+      let res = await this.$api.post(
+        `/api/square/remove-snippet-from-store`,
         postData
       );
       store.linkedSnippet = res.data.snippet;
