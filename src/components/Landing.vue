@@ -22,6 +22,12 @@
                   text-align: center;
                 "
               >
+                <v-img
+                  src="/imgs/haggle-logo-clipped.png"
+                  contain
+                  max-height="120"
+                  max-width="240"
+                />
                 <p
                   style="
                     font-size: 92px;
