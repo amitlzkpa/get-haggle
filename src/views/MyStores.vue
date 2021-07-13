@@ -78,24 +78,20 @@ export default {
   data() {
     return {
       // stores: storesSample
-      allStores: []
+      stores: []
     };
-  },
-  computed: {
-    stores() {
-      return this.allStores;
-    }
   },
   async mounted() {
     let res;
     res = await this.$api.post(`/api/square/get-my-stores`);
-    this.allStores = res.data.sites;
-    for (let st of this.allStores) {
+    let ss = res.data.sites;
+    for (let st of ss) {
       res = await this.$api.post(`/api/square/retrieve-snippet-for-store`, {
         siteId: st.id
       });
       st.linkedSnippet = res.data.snippet;
     }
+    this.stores = ss;
   },
   methods: {
     async addSnippetToStore(store) {
