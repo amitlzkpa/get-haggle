@@ -10,21 +10,42 @@
             :href="`/my-store/${store.id}`"
           >
             <v-card outlined tile class="pa-8">
-              <span class="display-1 font-weight-light">{{
-                store.site_title
-              }}</span>
-              <br />
-              <a
-                target="_blank"
-                :href="`https://${store.domain}`"
-                class="text-decoration-none"
-                style="font-family: Consolas"
-                >{{ `https://${store.domain}` }}</a
-              >
-              <br />
-              <span style="font-size: 12px" class="text--grey font-italic"
-                >Created {{ moment(store.created_at).fromNow() }}</span
-              >
+              <div class="d-flex">
+                <div class="flex-grow-1">
+                  <span class="display-1 font-weight-light">{{
+                    store.site_title
+                  }}</span>
+                  <br />
+                  <a
+                    target="_blank"
+                    :href="`https://${store.domain}`"
+                    class="text-decoration-none"
+                    style="font-family: Consolas"
+                    >{{ `https://${store.domain}` }}</a
+                  >
+                  <br />
+                  <span style="font-size: 12px" class="text--grey font-italic"
+                    >Created {{ moment(store.created_at).fromNow() }}</span
+                  >
+                </div>
+                <div class="pt-6" style="cursor: pointer">
+                  <v-icon
+                    large
+                    :color="store.isLinkedToHaggle ? 'grey' : '#eb5600'"
+                  >
+                    {{
+                      store.isLinkedToHaggle ? "mdi-check" : "mdi-plus-thick"
+                    }}
+                  </v-icon>
+                  <v-icon
+                    to="!#"
+                    large
+                    :color="store.isLinkedToHaggle ? 'grey' : '#eb5600'"
+                  >
+                    mdi-account-group
+                  </v-icon>
+                </div>
+              </div>
             </v-card>
           </div>
         </v-col>
@@ -41,7 +62,8 @@ let storesSample = [
     domain: "cupcake-foundry.square.site",
     is_published: true,
     created_at: "2021-07-13T02:25:22.000000Z",
-    updated_at: "2021-07-13T02:26:47.000000Z"
+    updated_at: "2021-07-13T02:26:47.000000Z",
+    isLinkedToHaggle: false
   },
   {
     id: "site_829240995758856365",
@@ -49,7 +71,8 @@ let storesSample = [
     domain: "colourful-chocolates.square.site",
     is_published: true,
     created_at: "2021-07-09T01:48:17.000000Z",
-    updated_at: "2021-07-13T02:31:06.000000Z"
+    updated_at: "2021-07-13T02:31:06.000000Z",
+    isLinkedToHaggle: true
   }
 ];
 
