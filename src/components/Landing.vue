@@ -47,7 +47,7 @@
                 <v-btn
                   class="ma-4"
                   text
-                  href="https://youtu.be/E-tR7jIf4gI"
+                  href="https://youtu.be/VEe3KtQBIe8"
                   target="_blank"
                   >VIDEO</v-btn
                 >
