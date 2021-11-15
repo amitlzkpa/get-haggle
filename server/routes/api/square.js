@@ -23,25 +23,31 @@ router.post("/connect", async (req, res) => {
 });
 
 router.post("/get-store-details", async function(req, res) {
-  const headers = {
+  let resp;
+  let headers = {
     ...defaultSquareReqHeaders,
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
   };
-  let apiEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/catalog/list?types=ITEM`;
-  let resp = await axios.get(apiEndPt, { headers });
-  console.log(req.body);
+  let sitesEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/sites`;
+  resp = await axios.get(sitesEndPt, { headers });
+  let siteDetails = resp.data.filter(
+    (s) => s.domain === req.body.storeDomain
+  )[0];
+
+  let itemsEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/catalog/list?types=ITEM`;
+  resp = await axios.get(itemsEndPt, { headers });
   let storeItems = resp.data.objects.filter(
     (i) => !i.is_deleted && i.item_data.ecom_uri.includes(req.body.storeDomain)
   );
   let retVal = {
-    items: resp.data,
+    siteDetails,
     storeItems,
   };
   return res.json(retVal);
 });
 
 router.post("/get-my-stores", async function(req, res) {
-  const headers = {
+  let headers = {
     ...defaultSquareReqHeaders,
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
   };
@@ -52,7 +58,7 @@ router.post("/get-my-stores", async function(req, res) {
 
 router.post("/add-snippet-to-store", async function(req, res) {
   let siteId = req.body.siteId;
-  const headers = {
+  let headers = {
     ...defaultSquareReqHeaders,
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
   };
@@ -69,7 +75,7 @@ router.post("/add-snippet-to-store", async function(req, res) {
 
 router.post("/retrieve-snippet-for-store", async function(req, res) {
   let siteId = req.body.siteId;
-  const headers = {
+  let headers = {
     ...defaultSquareReqHeaders,
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
   };
@@ -84,7 +90,7 @@ router.post("/retrieve-snippet-for-store", async function(req, res) {
 
 router.post("/remove-snippet-from-store", async function(req, res) {
   let siteId = req.body.siteId;
-  const headers = {
+  let headers = {
     ...defaultSquareReqHeaders,
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
   };

@@ -86,8 +86,8 @@ let storesSample = [
 export default {
   data() {
     return {
-      // stores: storesSample
-      stores: []
+      stores: storesSample
+      // stores: []
     };
   },
   async mounted() {
