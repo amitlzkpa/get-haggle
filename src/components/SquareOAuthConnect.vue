@@ -1,20 +1,38 @@
 <template>
-  <div class="d-flex py-4">
-    <a
-      v-if="!hasSquareLinked"
-      :href="`https://connect.squareup.com/oauth2/authorize?client_id=${env.SQUARE_CLIENT_ID}&scope=MERCHANT_PROFILE_READ+ONLINE_STORE_SITE_READ+ITEMS_READ+ITEMS_WRITE+ITEMS_WRITE+INVENTORY_READ+INVENTORY_WRITE+ONLINE_STORE_SNIPPETS_READ+ONLINE_STORE_SNIPPETS_WRITE`"
-      target="_blank"
-    >
-      <v-img height="60" width="240" class="ma-2" src="/imgs/square-logo.svg" />
-    </a>
-
-    <div class="flex-grow-1 pt-4 ml-4">
-      <div v-if="!hasSquareLinked">
-        <h4>Connect with Square to sync your stores</h4>
-        <p>Click on the logo to get started.</p>
+  <div>
+    <div class="d-flex justify-center">
+      <div style="width: 320px" class="mr-8">
+        <v-img src="/imgs/square-logo.svg" />
       </div>
-      <div v-else>
-        <h4 class="mb-4">Square account connected!</h4>
+
+      <div v-if="hasSquareLinked" class="d-flex flex-column justify-center">
+        <h3>Connected!</h3>
+        <span :class="tokenHasExpired ? 'red--text' : ''">
+          {{ tokenHasExpired ? "Token expired:" : "Token expires:" }}
+          {{
+            moment($auth.dbUser.squareToken.expires_at).format("MMMM Do YYYY")
+          }}
+        </span>
+        <a
+          style="text-decoration: none"
+          class="blue--text"
+          :href="sqTokenOAuthURL"
+          target="_blank"
+        >
+          Click here to renew
+        </a>
+      </div>
+
+      <div v-else class="d-flex flex-column justify-center">
+        <h3>Connect with Square to sync your stores!</h3>
+        <a
+          style="text-decoration: none"
+          class="blue--text"
+          :href="sqTokenOAuthURL"
+          target="_blank"
+        >
+          Click here to connect
+        </a>
       </div>
     </div>
   </div>
@@ -29,6 +47,12 @@ export default {
         !!this.$auth.dbUser.squareToken &&
         JSON.stringify(this.$auth.dbUser.squareToken, null, 2) !== "{}"
       );
+    },
+    tokenHasExpired() {
+      return this.moment(this.$auth.dbUser.squareToken.expires_at).isBefore();
+    },
+    sqTokenOAuthURL() {
+      return `https://connect.${this.env.SQUARE_API_ENDPT}.com/oauth2/authorize?client_id=${this.env.SQUARE_CLIENT_ID}&scope=MERCHANT_PROFILE_READ+ONLINE_STORE_SITE_READ+ITEMS_READ+ITEMS_WRITE+ITEMS_WRITE+INVENTORY_READ+INVENTORY_WRITE+ONLINE_STORE_SNIPPETS_READ+ONLINE_STORE_SNIPPETS_WRITE`;
     }
   },
   async mounted() {

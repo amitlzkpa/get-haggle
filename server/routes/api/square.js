@@ -3,7 +3,7 @@ const router = require("express").Router();
 const { Client } = require("square");
 
 router.post("/connect", async (req, res) => {
-  let tokenURL = "https://connect.squareup.com/oauth2/token";
+  let tokenURL = `https://connect.${process.env.SQUARE_API_ENDPT}.com/oauth2/token`;
   let postData = {
     client_id: process.env.SQUARE_CLIENT_ID,
     client_secret: process.env.SQUARE_CLIENT_SECRET,
@@ -27,7 +27,7 @@ router.post("/get-my-stores", async function(req, res) {
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
     "Square-Version": "2021-06-16",
   };
-  let apiEndPt = "https://connect.squareup.com/v2/sites";
+  let apiEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/sites`;
   let resp = await axios.get(apiEndPt, { headers });
   return res.json(resp.data);
 });
@@ -45,7 +45,7 @@ router.post("/add-snippet-to-store", async function(req, res) {
         '<script src="https://get-haggle.herokuapp.com/square-snippet.js"></script>',
     },
   };
-  let apiEndPt = `https://connect.squareup.com/v2/sites/${siteId}/snippet`;
+  let apiEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/sites/${siteId}/snippet`;
   let resp = await axios.post(apiEndPt, postBody, { headers });
   return res.json(resp.data);
 });
@@ -57,7 +57,7 @@ router.post("/retrieve-snippet-for-store", async function(req, res) {
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
     "Square-Version": "2021-06-16",
   };
-  let apiEndPt = `https://connect.squareup.com/v2/sites/${siteId}/snippet`;
+  let apiEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/sites/${siteId}/snippet`;
   try {
     let resp = await axios.get(apiEndPt, { headers });
     return res.json(resp.data);
@@ -73,7 +73,7 @@ router.post("/remove-snippet-from-store", async function(req, res) {
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
     "Square-Version": "2021-06-16",
   };
-  let apiEndPt = `https://connect.squareup.com/v2/sites/${siteId}/snippet`;
+  let apiEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/sites/${siteId}/snippet`;
   let resp = await axios.delete(apiEndPt, { headers });
   return res.json(resp.data);
 });
