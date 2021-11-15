@@ -31,6 +31,7 @@ router.post("/get-my-stores", async function(req, res) {
     ...defaultSquareReqHeaders,
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
   };
+  console.log(headers);
   let apiEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/sites`;
   let resp = await axios.get(apiEndPt, { headers });
   return res.json(resp.data);
