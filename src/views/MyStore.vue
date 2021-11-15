@@ -40,14 +40,69 @@
             </div>
           </v-card>
 
-          <hr />
+          <v-divider class="my-8" />
 
-          <div v-for="storeItem of storeInfo.storeItems" :key="storeItem.id">
-            <a :href="storeItem.item_data.ecom_uri" target="_blank">{{
-              storeItem.item_data.name
-            }}</a>
-            <v-img :src="storeItem.item_data.ecom_image_uris[0]" />
-          </div>
+          <v-row>
+            <v-col lg="8">
+              <div class="d-flex">
+                <div>
+                  <h2 class="primary--text">Deals</h2>
+                </div>
+                <v-spacer />
+                <div>
+                  <v-tabs right color="primary">
+                    <v-tab>Live</v-tab>
+                    <v-tab>Past</v-tab>
+                  </v-tabs>
+                </div>
+              </div>
+            </v-col>
+
+            <v-col lg="4">
+              <div class="d-flex">
+                <v-divider vertical class="mx-8" />
+                <div style="width: 100%">
+                  <h2 class="primary--text">Items</h2>
+
+                  <v-container fluid grid-list-md>
+                    <v-layout row wrap>
+                      <v-flex
+                        xs12
+                        md6
+                        v-for="storeItem of storeInfo.storeItems"
+                        :key="storeItem.id"
+                      >
+                        <v-card outlined>
+                          <v-img
+                            :src="storeItem.item_data.ecom_image_uris[0]"
+                            class="white--text align-end"
+                            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                            aspect-ratio="1"
+                          >
+                            <v-card-title
+                              v-text="storeItem.item_data.name"
+                            ></v-card-title>
+                          </v-img>
+
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+
+                            <v-btn
+                              icon
+                              :href="storeItem.item_data.ecom_uri"
+                              target="_blank"
+                            >
+                              <v-icon>mdi-open-in-new</v-icon>
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </div>
+              </div>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
     </v-container>
@@ -57,43 +112,41 @@
 <script>
 let storeInfoSample = {
   siteDetails: {
-    id: "site_829240995758856365",
-    site_title: "Colourful Chocolates",
-    domain: "colourful-chocolates.square.site",
+    id: "site_942725068125726254",
+    site_title: "Cupcake Foundry",
+    domain: "cupcake-foundry.square.site",
     is_published: true,
-    created_at: "2021-07-09T01:48:17.000000Z",
-    updated_at: "2021-07-13T02:31:06.000000Z",
-    isLinkedToHaggle: true
+    created_at: "2021-07-13T02:25:22.000000Z",
+    updated_at: "2021-09-23T18:53:37.000000Z"
   },
   storeItems: [
     {
       type: "ITEM",
-      id: "G74B55BRRDZGYXN2YLFJM2L6",
-      updated_at: "2021-07-13T05:04:04.3Z",
-      created_at: "1970-01-19T19:36:35.089Z",
-      version: 1626152644300,
+      id: "LY3KYDY44KAIB4YAG4P3UEAF",
+      updated_at: "2021-07-13T02:27:20.902Z",
+      created_at: "1970-01-19T19:42:22.968Z",
+      version: 1626143240902,
       is_deleted: false,
       present_at_all_locations: true,
-      image_id: "EEYJVORWBD3QLB2IDBQIH2SA",
+      image_id: "DJIXZNEM5MDTU6V5SY4N7I7I",
       item_data: {
-        name: "Red Chocolate",
-        visibility: "PRIVATE",
+        name: "Green Cupcakes",
         variations: [
           {
             type: "ITEM_VARIATION",
-            id: "YARB3XG7HRSTVXVZ7RRQQU4S",
-            updated_at: "2021-07-12T16:07:21.393Z",
-            created_at: "1970-01-19T19:36:35.089Z",
-            version: 1626106041393,
+            id: "BGBGY3YZVEDE3TTR4W2IICEK",
+            updated_at: "2021-07-13T02:23:08.509Z",
+            created_at: "1970-01-19T19:42:22.968Z",
+            version: 1626142988509,
             is_deleted: false,
             present_at_all_locations: true,
             item_variation_data: {
-              item_id: "G74B55BRRDZGYXN2YLFJM2L6",
+              item_id: "LY3KYDY44KAIB4YAG4P3UEAF",
               name: "Regular",
-              ordinal: 1,
+              ordinal: 0,
               pricing_type: "FIXED_PRICING",
               price_money: {
-                amount: 4000,
+                amount: 3000,
                 currency: "USD"
               },
               location_overrides: [
@@ -109,11 +162,10 @@ let storeInfoSample = {
           }
         ],
         product_type: "REGULAR",
-        skip_modifier_screen: false,
         ecom_uri:
-          "https://colourful-chocolates.square.site/product/red-chocolate/1",
+          "https://cupcake-foundry.square.site/product/green-cupcakes/3",
         ecom_image_uris: [
-          "https://colourful-chocolates.square.site/uploads/2/6/3/6/26366173/s911168244534723229_p1_i1_w1000.jpeg"
+          "https://cupcake-foundry.square.site/uploads/2/6/3/6/26366173/s911168244534723229_p3_i1_w547.jpeg"
         ],
         ecom_available: true,
         ecom_visibility: "VISIBLE"
@@ -121,29 +173,78 @@ let storeInfoSample = {
     },
     {
       type: "ITEM",
-      id: "GHJW7KHIZJPKL334JRFCHN35",
-      updated_at: "2021-07-12T16:07:05.751Z",
-      created_at: "1970-01-19T19:36:35.173Z",
-      version: 1626106025751,
+      id: "LGDMPENYPUAWK5Y75I7Z2TN7",
+      updated_at: "2021-07-13T02:28:05.779Z",
+      created_at: "1970-01-19T19:42:23.026Z",
+      version: 1626143285779,
       is_deleted: false,
       present_at_all_locations: true,
-      image_id: "UMFZRZOHJ3QVXAE4CA3JCE2N",
+      image_id: "JS47M2O5FTHOH6TPPHNPZAM5",
       item_data: {
-        name: "Blue Chocolate",
-        visibility: "PRIVATE",
+        name: "Blue Cupcake",
         variations: [
           {
             type: "ITEM_VARIATION",
-            id: "YD37ZHMO5E2JC7IYD7GC3LTE",
-            updated_at: "2021-07-12T16:07:05.751Z",
-            created_at: "1970-01-19T19:36:35.173Z",
-            version: 1626106025751,
+            id: "ODURO75BXJVZBP5I6L4U5YB5",
+            updated_at: "2021-07-13T02:23:56.055Z",
+            created_at: "1970-01-19T19:42:23.026Z",
+            version: 1626143036055,
             is_deleted: false,
             present_at_all_locations: true,
             item_variation_data: {
-              item_id: "GHJW7KHIZJPKL334JRFCHN35",
+              item_id: "LGDMPENYPUAWK5Y75I7Z2TN7",
               name: "Regular",
-              ordinal: 1,
+              ordinal: 0,
+              pricing_type: "FIXED_PRICING",
+              price_money: {
+                amount: 2000,
+                currency: "USD"
+              },
+              location_overrides: [
+                {
+                  location_id: "48CC71X2P981X",
+                  track_inventory: true
+                }
+              ],
+              track_inventory: false,
+              sellable: true,
+              stockable: true
+            }
+          }
+        ],
+        product_type: "REGULAR",
+        ecom_uri: "https://cupcake-foundry.square.site/product/blue-cupcake/4",
+        ecom_image_uris: [
+          "https://cupcake-foundry.square.site/uploads/2/6/3/6/26366173/s911168244534723229_p4_i1_w691.jpeg"
+        ],
+        ecom_available: true,
+        ecom_visibility: "VISIBLE"
+      }
+    },
+    {
+      type: "ITEM",
+      id: "QGMQ2D3DHFVB37MSJIWSGJCG",
+      updated_at: "2021-07-13T02:27:35.652Z",
+      created_at: "1970-01-19T19:42:23.08Z",
+      version: 1626143255652,
+      is_deleted: false,
+      present_at_all_locations: true,
+      image_id: "GWEAD4OLOKBYI6DR6SQH6XNY",
+      item_data: {
+        name: "Yellow Cupcake",
+        variations: [
+          {
+            type: "ITEM_VARIATION",
+            id: "QDXE4D4NBGD6PUCLWBULMC65",
+            updated_at: "2021-07-13T02:24:57.448Z",
+            created_at: "1970-01-19T19:42:23.08Z",
+            version: 1626143097448,
+            is_deleted: false,
+            present_at_all_locations: true,
+            item_variation_data: {
+              item_id: "QGMQ2D3DHFVB37MSJIWSGJCG",
+              name: "Regular",
+              ordinal: 0,
               pricing_type: "FIXED_PRICING",
               price_money: {
                 amount: 6000,
@@ -162,11 +263,10 @@ let storeInfoSample = {
           }
         ],
         product_type: "REGULAR",
-        skip_modifier_screen: false,
         ecom_uri:
-          "https://colourful-chocolates.square.site/product/blue-chocolate/2",
+          "https://cupcake-foundry.square.site/product/yellow-cupcake/5",
         ecom_image_uris: [
-          "https://colourful-chocolates.square.site/uploads/2/6/3/6/26366173/s911168244534723229_p2_i1_w426.jpeg"
+          "https://cupcake-foundry.square.site/uploads/2/6/3/6/26366173/s911168244534723229_p5_i1_w860.jpeg"
         ],
         ecom_available: true,
         ecom_visibility: "VISIBLE"
