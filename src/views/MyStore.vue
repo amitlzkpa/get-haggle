@@ -70,7 +70,12 @@
                   <h2 class="primary--text">Deals</h2>
                 </div>
                 <v-spacer />
-                <v-btn text plain class="primary--text font-weight-bold pt-3">
+                <v-btn
+                  to="/deal/new"
+                  text
+                  plain
+                  class="primary--text font-weight-bold pt-3"
+                >
                   <v-icon small class="mr-2">mdi-plus</v-icon>
                   New
                 </v-btn>

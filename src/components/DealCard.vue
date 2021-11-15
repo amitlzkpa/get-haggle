@@ -39,6 +39,17 @@
     </div>
     <div class="flex-grow-1">
       <div class="d-flex flex-column justify-center">
+        <div>
+          <v-btn
+            to="/deal/edit/foo"
+            text
+            plain
+            icon
+            class="grey--text ma-0 pa-0"
+          >
+            <v-icon>mdi-pencil</v-icon>
+          </v-btn>
+        </div>
         <h2 class="primary--text">Thanksgiving Groups</h2>
         <p class="secondary--text">
           Coupon: 30% off

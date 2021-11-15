@@ -1,40 +1,38 @@
 <template>
-  <div>    
+  <div>
     <v-row>
       <v-col>
         <v-toolbar flat>
           <v-spacer />
           <v-btn
-            v-if="project.user === $auth.dbUser._id"
-            :to="`/project/edit/${project._id}`"
+            v-if="deal.user === $auth.dbUser._id"
+            :to="`/deal/edit/${deal._id}`"
             text
           >
             edit
           </v-btn>
         </v-toolbar>
-        <h1>{{ project.name }}</h1>
-        <p>{{ project.description }}</p>
+        <h1>{{ deal.name }}</h1>
+        <p>{{ deal.description }}</p>
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
-      project: {}
-    }
+      deal: {}
+    };
   },
   async mounted() {
     let id = this.$route.params.id;
-    let res = await this.$api.get(`/api/projects/id/${id}`);
-    this.project = res.data;
+    let res = await this.$api.get(`/api/deals/id/${id}`);
+    this.deal = res.data;
   }
-}
+};
 </script>
 
 <style scoped>
-
 </style>

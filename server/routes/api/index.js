@@ -45,11 +45,7 @@ router.use(
   [checkJwt, errHandler, addUserToReq],
   require("./square")
 );
-router.use(
-  "/projects",
-  [checkJwt, errHandler, addUserToReq],
-  require("./project")
-);
+router.use("/deals", [checkJwt, errHandler, addUserToReq], require("./deal"));
 
 // PUBLIC
 

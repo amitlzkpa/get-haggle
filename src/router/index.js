@@ -7,8 +7,8 @@ import ProfileView from "@/views/ProfileView.vue";
 import ProfileEdit from "@/views/ProfileEdit.vue";
 import MyStores from "@/views/MyStores.vue";
 import MyStore from "@/views/MyStore.vue";
-import ProjectView from "@/views/ProjectView.vue";
-import ProjectEdit from "@/views/ProjectEdit.vue";
+import DealView from "@/views/DealView.vue";
+import DealEdit from "@/views/DealEdit.vue";
 
 import guards from "@/router/guards";
 
@@ -81,29 +81,29 @@ const routes = [
     },
   },
   {
-    path: "/project/new",
-    name: "new-project",
-    component: ProjectEdit,
+    path: "/deal/new",
+    name: "new-deal",
+    component: DealEdit,
     meta: {
-      title: (route) => "App: New Project",
+      title: (route) => "App: New Deal",
       guards: [guards.authGuard],
     },
   },
   {
-    path: "/project/edit/:id",
-    name: "edit-project",
-    component: ProjectEdit,
+    path: "/deal/edit/:id",
+    name: "edit-deal",
+    component: DealEdit,
     meta: {
-      title: (route) => "App: Edit Project",
-      guards: [guards.authGuard, guards.projectEditGuard],
+      title: (route) => "App: Edit Deal",
+      guards: [guards.authGuard, guards.dealEditGuard],
     },
   },
   {
-    path: "/project/view/:id",
-    name: "view-project",
-    component: ProjectView,
+    path: "/deal/view/:id",
+    name: "view-deal",
+    component: DealView,
     meta: {
-      title: (route) => "App: View Project",
+      title: (route) => "App: View Deal",
       guards: [guards.authGuard],
     },
   },
