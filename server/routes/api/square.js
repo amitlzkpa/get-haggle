@@ -37,6 +37,7 @@ router.post("/get-store-details", async function(req, res) {
       i.item_data.ecom_uri.includes(req.body.storeDomain)
   );
   let retVal = {
+    items: resp.data,
     storeItems,
   };
   return res.json(retVal);
