@@ -29,12 +29,9 @@ router.post("/get-store-details", async function(req, res) {
   };
   let apiEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/catalog/list?types=ITEM`;
   let resp = await axios.get(apiEndPt, { headers });
+  console.log(req.body);
   let storeItems = resp.data.objects.filter(
-    (i) =>
-      !i.is_deleted &&
-      i.item_data.ecom_visibility.toLowerCase() === "visible" &&
-      i.item_data.ecom_available &&
-      i.item_data.ecom_uri.includes(req.body.storeDomain)
+    (i) => !i.is_deleted && i.item_data.ecom_uri.includes(req.body.storeDomain)
   );
   let retVal = {
     items: resp.data,
