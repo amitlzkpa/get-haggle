@@ -101,6 +101,7 @@ export default {
       st.linkedSnippet = res.data.snippet;
     }
     this.stores = ss;
+    console.log(this.stores);
   },
   methods: {
     async addSnippetToStore(store) {

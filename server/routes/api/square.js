@@ -30,7 +30,7 @@ router.post("/get-store-details", async function(req, res) {
   };
   let sitesEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/sites`;
   resp = await axios.get(sitesEndPt, { headers });
-  let siteDetails = resp.data.filter(
+  let siteDetails = resp.data.sites.filter(
     (s) => s.domain === req.body.storeDomain
   )[0];
 
