@@ -337,6 +337,7 @@ export default {
     };
   },
   async mounted() {
+    if (process.env.NODE_ENV === "development") return;
     let postBody = {
       storeDomain: this.$route.params.storeDomain
     };

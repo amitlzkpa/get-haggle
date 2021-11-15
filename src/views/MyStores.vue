@@ -91,6 +91,7 @@ export default {
     };
   },
   async mounted() {
+    if (process.env.NODE_ENV === "development") return;
     let res;
     res = await this.$api.post(`/api/square/get-my-stores`);
     let ss = res.data.sites;
