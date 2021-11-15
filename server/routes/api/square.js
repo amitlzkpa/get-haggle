@@ -2,6 +2,11 @@ const axios = require("axios");
 const router = require("express").Router();
 const { Client } = require("square");
 
+let defaultSquareReqHeaders = {
+  "Content-Type": "application/json",
+  "Square-Version": "2021-10-20",
+};
+
 router.post("/connect", async (req, res) => {
   let tokenURL = `https://connect.${process.env.SQUARE_API_ENDPT}.com/oauth2/token`;
   let postData = {
@@ -23,9 +28,8 @@ router.post("/get-store-details", async function(req, res) {
 
 router.post("/get-my-stores", async function(req, res) {
   const headers = {
-    "Content-Type": "application/json",
+    ...defaultSquareReqHeaders,
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
-    "Square-Version": "2021-06-16",
   };
   let apiEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/sites`;
   let resp = await axios.get(apiEndPt, { headers });
@@ -35,9 +39,8 @@ router.post("/get-my-stores", async function(req, res) {
 router.post("/add-snippet-to-store", async function(req, res) {
   let siteId = req.body.siteId;
   const headers = {
-    "Content-Type": "application/json",
+    ...defaultSquareReqHeaders,
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
-    "Square-Version": "2021-06-16",
   };
   let postBody = {
     snippet: {
@@ -53,9 +56,8 @@ router.post("/add-snippet-to-store", async function(req, res) {
 router.post("/retrieve-snippet-for-store", async function(req, res) {
   let siteId = req.body.siteId;
   const headers = {
-    "Content-Type": "application/json",
+    ...defaultSquareReqHeaders,
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
-    "Square-Version": "2021-06-16",
   };
   let apiEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/sites/${siteId}/snippet`;
   try {
@@ -69,9 +71,8 @@ router.post("/retrieve-snippet-for-store", async function(req, res) {
 router.post("/remove-snippet-from-store", async function(req, res) {
   let siteId = req.body.siteId;
   const headers = {
-    "Content-Type": "application/json",
+    ...defaultSquareReqHeaders,
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
-    "Square-Version": "2021-06-16",
   };
   let apiEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/sites/${siteId}/snippet`;
   let resp = await axios.delete(apiEndPt, { headers });

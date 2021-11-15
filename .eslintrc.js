@@ -19,5 +19,13 @@ module.exports = {
     "no-console": "off",
     "no-debugger": "off",
     "no-unused-vars": "off",
+    "no-empty": "off",
+    "no-unreachable": "off",
+    curly: "on",
+    eqeqeq: "on",
+    "no-process-env": "off",
+    "no-mixed-requires": "off",
+    "no-new-require": "off",
+    "no-inline-comments": "off",
   },
 };
