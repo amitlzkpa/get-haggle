@@ -332,11 +332,11 @@ export default {
     };
   },
   async mounted() {
-    // let postBody = {
-    //   storeDomain: this.$route.params.storeDomain
-    // };
-    // let res = await this.$api.post(`/api/square/get-store-details`, postBody);
-    // this.storeInfo = res.data;
+    let postBody = {
+      storeDomain: this.$route.params.storeDomain
+    };
+    let res = await this.$api.post(`/api/square/get-store-details`, postBody);
+    this.storeInfo = res.data;
   }
 };
 </script>
