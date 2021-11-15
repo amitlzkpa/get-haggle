@@ -51,7 +51,7 @@ const routes = [
     },
   },
   {
-    path: "/my-store/:site_id",
+    path: "/my-store/:storeDomain",
     name: "my-store",
     component: MyStore,
     meta: {
