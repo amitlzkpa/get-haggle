@@ -24,18 +24,39 @@
                 >
               </div>
               <div class="pt-6" style="cursor: pointer">
-                <v-icon
-                  large
-                  :color="
-                    storeInfo.siteDetails.isLinkedToHaggle ? 'grey' : '#eb5600'
-                  "
-                >
-                  {{
-                    storeInfo.siteDetails.isLinkedToHaggle
-                      ? "mdi-check"
-                      : "mdi-plus-thick"
-                  }}
-                </v-icon>
+                <v-tooltip left>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon
+                      v-bind="attrs"
+                      v-on="on"
+                      large
+                      :color="
+                        storeInfo.siteDetails.isLinkedToHaggle
+                          ? 'grey'
+                          : '#eb5600'
+                      "
+                    >
+                      {{
+                        storeInfo.siteDetails.isLinkedToHaggle
+                          ? "mdi-check"
+                          : "mdi-plus-thick"
+                      }}
+                    </v-icon>
+                  </template>
+                  <p
+                    class="text-center pt-4"
+                    v-if="storeInfo.siteDetails.isLinkedToHaggle"
+                  >
+                    Pool discounts currently enabled!
+                    <br />
+                    Click to turn off
+                  </p>
+                  <p class="text-center pt-4" v-else>
+                    Pool discounts have been disabled.
+                    <br />
+                    Click to turn on
+                  </p>
+                </v-tooltip>
               </div>
             </div>
           </v-card>
