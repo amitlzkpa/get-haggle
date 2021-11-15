@@ -5,7 +5,6 @@ import About from "@/views/About.vue";
 import Page404 from "@/views/Page404.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import ProfileEdit from "@/views/ProfileEdit.vue";
-import Dashboard from "@/views/Dashboard.vue";
 import MyStores from "@/views/MyStores.vue";
 import MyStore from "@/views/MyStore.vue";
 import ProjectView from "@/views/ProjectView.vue";
@@ -30,15 +29,6 @@ const routes = [
     component: About,
     meta: {
       title: (route) => "App: About",
-    },
-  },
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: Dashboard,
-    meta: {
-      title: (route) => "App: Dashboard",
-      guards: [guards.authGuard],
     },
   },
   {
