@@ -70,6 +70,11 @@
                   <h2 class="primary--text">Deals</h2>
                 </div>
                 <v-spacer />
+                <v-btn text plain class="primary--text font-weight-bold pt-3">
+                  <v-icon small class="mr-2">mdi-plus</v-icon>
+                  New
+                </v-btn>
+                <v-divider vertical class="ma-4" />
                 <div>
                   <v-tabs v-model="activeTab" right color="primary">
                     <v-tab href="#tab-live">Live</v-tab>
@@ -80,91 +85,18 @@
               <div>
                 <v-tabs-items v-model="activeTab">
                   <v-tab-item value="tab-live">
-                    <v-card
-                      class="d-flex align-center pa-4"
-                      height="240"
-                      outlined
-                    >
-                      <div
-                        class="
-                          d-flex
-                          flex-column
-                          justify-center
-                          align-center
-                          px-12
-                        "
-                      >
-                        <v-progress-circular
-                          color="primary"
-                          size="160"
-                          width="4"
-                          rotate="270"
-                          :value="60"
-                        >
-                          <v-progress-circular
-                            color="secondary"
-                            size="200"
-                            width="8"
-                            rotate="270"
-                            :value="40"
-                          >
-                            <div
-                              class="
-                                d-flex
-                                flex-column
-                                justify-center
-                                align-center
-                              "
-                            >
-                              <v-tooltip bottom>
-                                <template v-slot:activator="{ on, attrs }">
-                                  <v-card
-                                    flat
-                                    class="d-flex align-end"
-                                    v-bind="attrs"
-                                    v-on="on"
-                                  >
-                                    <h2
-                                      class="primary--text"
-                                      style="font-size: 2.2em"
-                                    >
-                                      34
-                                    </h2>
-                                    <h4 class="mb-2">/60</h4>
-                                  </v-card>
-                                </template>
-                                <span>34 people in current pool</span>
-                              </v-tooltip>
-                              <v-tooltip bottom>
-                                <template v-slot:activator="{ on, attrs }">
-                                  <v-card
-                                    flat
-                                    class="grey--text"
-                                    v-bind="attrs"
-                                    v-on="on"
-                                  >
-                                    4/10
-                                  </v-card>
-                                </template>
-                                <span>4 pools filled</span>
-                              </v-tooltip>
-                            </div>
-                          </v-progress-circular>
-                        </v-progress-circular>
-                      </div>
-                      <div class="flex-grow-1">
-                        <div class="d-flex flex-column justify-center">
-                          <h2 class="primary--text">Thanksgiving Groups</h2>
-                          <p class="secondary--text">
-                            Coupon: 30% off
-                            <br />
-                            Ends: 1st December, 2021
-                          </p>
-                        </div>
-                      </div>
-                    </v-card>
+                    <div class="my-4">
+                      <DealCard />
+                    </div>
+                    <div class="my-4">
+                      <DealCard />
+                    </div>
                   </v-tab-item>
-                  <v-tab-item value="tab-past"> Past </v-tab-item>
+                  <v-tab-item value="tab-past">
+                    <div class="my-4">
+                      <DealCard />
+                    </div>
+                  </v-tab-item>
                 </v-tabs-items>
               </div>
             </v-col>
@@ -180,6 +112,7 @@
                       <v-flex
                         lg12
                         xl6
+                        class="my-1"
                         v-for="storeItem of storeInfo.storeItems"
                         :key="storeItem.id"
                       >
@@ -221,6 +154,8 @@
 </template>
 
 <script>
+import DealCard from "@/components/DealCard.vue";
+
 let storeInfoSample = {
   siteDetails: {
     id: "site_942725068125726254",
@@ -387,6 +322,9 @@ let storeInfoSample = {
 };
 
 export default {
+  components: {
+    DealCard
+  },
   data() {
     return {
       activeTab: null,
