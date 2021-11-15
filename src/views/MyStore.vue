@@ -66,7 +66,7 @@ export default {
   },
   async mounted() {
     let postBody = {
-      storeId: this.$route.params.site_id
+      storeDomain: this.$route.params.domain
     };
     let res = await this.$api.post(`/api/square/get-store-details`, postBody);
     console.log(res.data);

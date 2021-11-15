@@ -8,12 +8,7 @@
               <div class="d-flex">
                 <div class="flex-grow-1">
                   <span class="display-1 font-weight-light">
-                    <a
-                      :href="`/my-store/${store.id}`"
-                      class="text-decoration-none"
-                    >
-                      {{ store.site_title }}
-                    </a>
+                    {{ store.site_title }}
                   </span>
                   <br />
                   <a
@@ -24,9 +19,9 @@
                     >{{ `https://${store.domain}` }}</a
                   >
                   <br />
-                  <span style="font-size: 12px" class="text--grey font-italic"
-                    >Created {{ moment(store.created_at).fromNow() }}</span
-                  >
+                  <span style="font-size: 12px" class="text--grey font-italic">
+                    Created {{ moment(store.created_at).fromNow() }}
+                  </span>
                 </div>
                 <div class="pt-6">
                   <v-btn
@@ -35,6 +30,7 @@
                         ? removeSnippetFromStore(store)
                         : addSnippetToStore(store)
                     "
+                    fab
                     text
                     large
                     class="pa-4"
@@ -43,8 +39,16 @@
                     <v-icon large plain>
                       {{ store.linkedSnippet ? "mdi-check" : "mdi-plus-thick" }}
                     </v-icon>
-                    <v-icon class="mx-4" plain large>
-                      mdi-account-group
+                  </v-btn>
+                  <v-btn
+                    :to="`/my-store/${store.domain}`"
+                    fab
+                    text
+                    large
+                    class="pa-4"
+                  >
+                    <v-icon class="mx-4 grey--text" plain large>
+                      mdi-settings
                     </v-icon>
                   </v-btn>
                 </div>

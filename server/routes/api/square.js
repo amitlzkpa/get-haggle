@@ -23,7 +23,23 @@ router.post("/connect", async (req, res) => {
 });
 
 router.post("/get-store-details", async function(req, res) {
-  return res.json({ foo: "bar" });
+  const headers = {
+    ...defaultSquareReqHeaders,
+    Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
+  };
+  let apiEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/catalog/list?types=ITEM`;
+  let resp = await axios.get(apiEndPt, { headers });
+  let storeItems = resp.data.objects.filter(
+    (i) =>
+      !i.is_deleted &&
+      i.item_data.ecom_visibility.toLowerCase() === "visible" &&
+      i.item_data.ecom_available &&
+      i.item_data.ecom_uri.includes(req.body.storeDomain)
+  );
+  let retVal = {
+    storeItems,
+  };
+  return res.json(retVal);
 });
 
 router.post("/get-my-stores", async function(req, res) {
@@ -31,7 +47,6 @@ router.post("/get-my-stores", async function(req, res) {
     ...defaultSquareReqHeaders,
     Authorization: `${req.dbUser.squareToken.token_type} ${req.dbUser.squareToken.access_token}`,
   };
-  console.log(headers);
   let apiEndPt = `https://connect.${process.env.SQUARE_API_ENDPT}.com/v2/sites`;
   let resp = await axios.get(apiEndPt, { headers });
   return res.json(resp.data);
