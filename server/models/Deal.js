@@ -12,11 +12,7 @@ const DealSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    user: {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
-    },
-    storeName: {
+    storeDomain: {
       type: String,
       index: true,
     },
