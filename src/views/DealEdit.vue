@@ -56,7 +56,7 @@ export default {
     },
     async onClickDeleteDeal() {
       let p = await this.$api.delete(`/api/deals/id/${this.deal._id}`);
-      this.$router.push("/my-stores");
+      this.$router.push("/stores");
     }
   }
 };

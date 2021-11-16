@@ -71,7 +71,7 @@
                 </div>
                 <v-spacer />
                 <v-btn
-                  to="/deal/new"
+                  :to="`/store/${storeInfo.siteDetails.domain}/deal/new`"
                   text
                   plain
                   class="primary--text font-weight-bold pt-3"

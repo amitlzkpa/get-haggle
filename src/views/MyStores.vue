@@ -41,7 +41,7 @@
                     </v-icon>
                   </v-btn>
                   <v-btn
-                    :to="`/my-store/${store.domain}`"
+                    :to="`/store/${store.domain}`"
                     fab
                     text
                     large

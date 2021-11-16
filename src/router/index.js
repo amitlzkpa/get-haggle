@@ -31,8 +31,8 @@ const routes = [
     },
   },
   {
-    path: "/my-stores",
-    name: "my-stores",
+    path: "/stores",
+    name: "stores",
     component: MyStores,
     meta: {
       title: (route) => "App: My Stores",
@@ -40,12 +40,30 @@ const routes = [
     },
   },
   {
-    path: "/my-store/:storeDomain",
-    name: "my-store",
+    path: "/store/:storeDomain",
+    name: "store",
     component: MyStore,
     meta: {
       title: (route) => "App: My Store",
       guards: [guards.authGuard],
+    },
+  },
+  {
+    path: "/store/:storeDomain/deal/new",
+    name: "new-deal",
+    component: DealEdit,
+    meta: {
+      title: (route) => "App: New Deal",
+      guards: [guards.authGuard],
+    },
+  },
+  {
+    path: "/store/:storeDomain/deal/edit/:dealId",
+    name: "edit-deal",
+    component: DealEdit,
+    meta: {
+      title: (route) => "App: Edit Deal",
+      guards: [guards.authGuard, guards.dealEditGuard],
     },
   },
 
@@ -79,24 +97,7 @@ const routes = [
       guards: [guards.authGuard],
     },
   },
-  {
-    path: "/deal/new",
-    name: "new-deal",
-    component: DealEdit,
-    meta: {
-      title: (route) => "App: New Deal",
-      guards: [guards.authGuard],
-    },
-  },
-  {
-    path: "/deal/edit/:id",
-    name: "edit-deal",
-    component: DealEdit,
-    meta: {
-      title: (route) => "App: Edit Deal",
-      guards: [guards.authGuard, guards.dealEditGuard],
-    },
-  },
+
   {
     path: "/404",
     component: Page404,
