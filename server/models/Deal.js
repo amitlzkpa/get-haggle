@@ -21,7 +21,7 @@ const DealSchema = new mongoose.Schema(
       index: true,
     },
     redeemDays: {
-      type: Date,
+      type: Number,
     },
     poolSize: {
       type: Number,

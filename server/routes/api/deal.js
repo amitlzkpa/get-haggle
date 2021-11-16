@@ -14,26 +14,12 @@ router.delete("/id/:id", async (req, res) => {
   return res.json(del);
 });
 
-router.get("/all", async (req, res) => {
-  let deals = await Deal.find({ public: true });
-  return res.json(deals);
-});
-
-router.get("/current-user", async (req, res) => {
-  let deals = await Deal.find({ user: req.dbUser });
-  return res.json(deals);
-});
-
 router.post("/", async (req, res) => {
   const p = req.body;
   if (!p || p === {}) {
     return res.status(400).send();
   }
-  let deal = new Deal({
-    user: req.dbUser,
-    name: p.name,
-    description: p.description,
-  });
+  let deal = new Deal(p);
   deal = await deal.save();
   return res.json(deal);
 });
@@ -44,8 +30,7 @@ router.put("/", async (req, res) => {
     return res.status(400).send();
   }
   let deal = await Deal.findOne({ _id: p._id });
-  deal.name = p.name || deal.name;
-  deal.description = p.description || deal.description;
+  deal = Object.assign(deal, p);
   deal = await deal.save();
   return res.json(deal);
 });
