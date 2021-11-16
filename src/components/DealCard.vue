@@ -41,7 +41,7 @@
       <div class="d-flex flex-column justify-center">
         <div>
           <v-btn
-            to="/deal/edit/foo"
+            :to="`/store/${$route.params.storeDomain}/deal/edit/foo`"
             text
             plain
             icon

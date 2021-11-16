@@ -26,7 +26,7 @@ const DealSchema = new mongoose.Schema(
     poolSize: {
       type: Number,
     },
-    poolCount: {
+    percentageDiscount: {
       type: Number,
     },
   },
