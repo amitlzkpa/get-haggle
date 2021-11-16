@@ -7,7 +7,6 @@ import ProfileView from "@/views/ProfileView.vue";
 import ProfileEdit from "@/views/ProfileEdit.vue";
 import MyStores from "@/views/MyStores.vue";
 import MyStore from "@/views/MyStore.vue";
-import DealView from "@/views/DealView.vue";
 import DealEdit from "@/views/DealEdit.vue";
 
 import guards from "@/router/guards";
@@ -96,15 +95,6 @@ const routes = [
     meta: {
       title: (route) => "App: Edit Deal",
       guards: [guards.authGuard, guards.dealEditGuard],
-    },
-  },
-  {
-    path: "/deal/view/:id",
-    name: "view-deal",
-    component: DealView,
-    meta: {
-      title: (route) => "App: View Deal",
-      guards: [guards.authGuard],
     },
   },
   {
