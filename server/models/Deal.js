@@ -29,6 +29,10 @@ const DealSchema = new mongoose.Schema(
     percentageDiscount: {
       type: Number,
     },
+    items: {
+      type: Array,
+      default: [],
+    },
   },
   { timestamps: true }
 );

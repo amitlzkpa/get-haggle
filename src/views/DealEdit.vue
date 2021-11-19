@@ -114,51 +114,96 @@
             <v-card flat outlined class="pa-4">
               <h2 class="primary--text mt-3">Items</h2>
               <v-card flat class="d-flex">
-                <v-card flat color="grey lighten-3" class="mt-4">
-                  <div class="pa-4" style="width: 200px">Boo</div>
-                </v-card>
+                <v-container grid-list-md class="grey lighten-3">
+                  <v-layout row wrap>
+                    <draggable
+                      :list="deal.items"
+                      group="items"
+                      style="min-height: 700px; min-width: 100px; width: 100%"
+                    >
+                      <v-flex
+                        lg12
+                        xl6
+                        class="my-1"
+                        v-for="storeItem of deal.items"
+                        :key="storeItem.id"
+                      >
+                        <v-card outlined>
+                          <v-img
+                            :src="storeItem.item_data.ecom_image_uris[0]"
+                            class="white--text align-end"
+                            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                            aspect-ratio="1"
+                          >
+                            <v-card-title
+                              v-text="storeItem.item_data.name"
+                            ></v-card-title>
+                          </v-img>
+
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+
+                            <v-btn
+                              icon
+                              :href="storeItem.item_data.ecom_uri"
+                              target="_blank"
+                            >
+                              <v-icon>mdi-open-in-new</v-icon>
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-flex>
+                    </draggable>
+                  </v-layout>
+                </v-container>
+
                 <v-container
+                  grid-list-md
                   style="
                     max-height: 900px;
                     overflow-y: auto;
                     overflow-x: hidden;
                   "
-                  fluid
-                  grid-list-md
                 >
                   <v-layout row wrap>
-                    <v-flex
-                      lg12
-                      xl6
-                      class="my-1"
-                      v-for="storeItem of storeInfo.storeItems"
-                      :key="storeItem.id"
+                    <draggable
+                      :list="storeInfo.storeItems"
+                      group="items"
+                      style="min-height: 100px; min-width: 100px; width: 100%"
                     >
-                      <v-card outlined>
-                        <v-img
-                          :src="storeItem.item_data.ecom_image_uris[0]"
-                          class="white--text align-end"
-                          gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                          aspect-ratio="1"
-                        >
-                          <v-card-title
-                            v-text="storeItem.item_data.name"
-                          ></v-card-title>
-                        </v-img>
-
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-
-                          <v-btn
-                            icon
-                            :href="storeItem.item_data.ecom_uri"
-                            target="_blank"
+                      <v-flex
+                        lg12
+                        xl6
+                        class="my-1"
+                        v-for="storeItem of storeInfo.storeItems"
+                        :key="storeItem.id"
+                      >
+                        <v-card outlined>
+                          <v-img
+                            :src="storeItem.item_data.ecom_image_uris[0]"
+                            class="white--text align-end"
+                            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                            aspect-ratio="1"
                           >
-                            <v-icon>mdi-open-in-new</v-icon>
-                          </v-btn>
-                        </v-card-actions>
-                      </v-card>
-                    </v-flex>
+                            <v-card-title
+                              v-text="storeItem.item_data.name"
+                            ></v-card-title>
+                          </v-img>
+
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+
+                            <v-btn
+                              icon
+                              :href="storeItem.item_data.ecom_uri"
+                              target="_blank"
+                            >
+                              <v-icon>mdi-open-in-new</v-icon>
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-flex>
+                    </draggable>
                   </v-layout>
                 </v-container>
               </v-card>
@@ -177,6 +222,8 @@
 </template>
 
 <script>
+import draggable from "vuedraggable";
+
 let storeInfoSample = {
   siteDetails: {
     id: "site_942725068125726254",
@@ -343,6 +390,10 @@ let storeInfoSample = {
 };
 
 export default {
+  components: {
+    draggable
+  },
+  order: 1,
   data() {
     return {
       storeInfo: storeInfoSample,
@@ -350,10 +401,11 @@ export default {
         name: "",
         description: "",
         storeDomain: "",
-        endsAt: "",
+        endsAt: null,
         redeemDays: 1,
         poolSize: 10,
-        percentageDiscount: 10
+        percentageDiscount: 10,
+        items: []
       },
       nameRules: [v => !!v || "Name is required"]
     };
@@ -361,6 +413,7 @@ export default {
   async mounted() {
     this.deal.storeDomain = this.$route.params.storeDomain;
     let dealId = this.$route.params.dealId;
+    console.log(dealId);
     if (dealId) {
       let p = await this.$api.get(`/api/deals/id/${dealId}`);
       this.deal = p.data;
