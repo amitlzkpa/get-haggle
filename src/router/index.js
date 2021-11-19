@@ -47,6 +47,7 @@ const routes = [
       title: (route) => "App: My Store",
       guards: [guards.authGuard],
     },
+    children: [],
   },
   {
     path: "/store/:storeDomain/deal/new",
@@ -63,7 +64,7 @@ const routes = [
     component: DealEdit,
     meta: {
       title: (route) => "App: Edit Deal",
-      guards: [guards.authGuard, guards.dealEditGuard],
+      guards: [guards.authGuard],
     },
   },
 

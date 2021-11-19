@@ -13,15 +13,7 @@ function pipeline(to, from, final, guards) {
   return nxt();
 }
 
-async function dealEditGuard(to, from, next) {
-  const authService = getInstance();
-  let p = await api.get(`/api/deals/id/${to.params.id}`);
-  if (p.data.user === authService.dbUser._id) return next();
-  else return next({ path: "/404" });
-}
-
 export default {
   pipeline,
   authGuard,
-  dealEditGuard,
 };
