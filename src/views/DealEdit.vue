@@ -171,18 +171,6 @@
             {{ deal._id ? "save" : "create" }}
           </v-btn>
         </v-card>
-
-        <v-card flat class="ma-4">
-          <v-btn
-            v-if="deal._id"
-            block
-            color="error"
-            class="mt-2"
-            @click="onClickDeleteDeal"
-          >
-            delete
-          </v-btn>
-        </v-card>
       </v-col>
     </v-row>
   </div>
@@ -394,10 +382,6 @@ export default {
         p = await this.$api.put("/api/deals/", this.deal);
       }
       console.log(p.data);
-    },
-    async onClickDeleteDeal() {
-      let p = await this.$api.delete(`/api/deals/id/${this.deal._id}`);
-      this.$router.push("/stores");
     }
   }
 };
